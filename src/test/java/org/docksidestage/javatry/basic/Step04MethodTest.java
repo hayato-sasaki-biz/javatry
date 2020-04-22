@@ -166,17 +166,28 @@ public class Step04MethodTest extends PlainTestCase {
 
     private String replaceAtoB(String target) {
         // DONE この処理であれば replaced という変数に切り出さなくても問題なさそうです。 by subaru (2020/04/22)
-        // TODO target が null だったらどうなるか、そこも想定して実装してみましょう！ by subaru (2020/04/22)
+        // DONE target が null だったらどうなるか、そこも想定して実装してみましょう！ by subaru (2020/04/22)
         // ↑ replaceBtoC、addPrefix メソッドについても同様に修正してください。
+        if (target == null) {
+            return target;
+        }
         return target.replace("A", "B");
     }
 
     private String replaceCtoB(String target) {
+        if (target == null) {
+            return target;
+        }
         return target.replace("C", "B");
     }
 
-    private String addPrefix(String str1, String str2) {
-        return str1 + ":" + str2;
+    private String addPrefix(String prefix, String text) {
+        // NOTE: prefixはnullではないと仮定 (この場合は例外を投げたほうが良い？)
+        if (text == null) {
+            // NOTE: textがnullの場合には空文字として扱う(本来ならtest_method_makingの目的に応じて扱いは変えるべき)
+            return prefix + ":";
+        }
+        return prefix + ":" + text;
     }
 
     private boolean isAvailableLogging() {
