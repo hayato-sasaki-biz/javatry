@@ -165,21 +165,18 @@ public class Step04MethodTest extends PlainTestCase {
     private boolean availableLogging = true;
 
     private String replaceAtoB(String target) {
-        // TODO この処理であれば replaced という変数に切り出さなくても問題なさそうです。 by subaru (2020/04/22)
+        // DONE この処理であれば replaced という変数に切り出さなくても問題なさそうです。 by subaru (2020/04/22)
         // TODO target が null だったらどうなるか、そこも想定して実装してみましょう！ by subaru (2020/04/22)
         // ↑ replaceBtoC、addPrefix メソッドについても同様に修正してください。
-        String replaced = target.replace("A", "B");
-        return replaced;
+        return target.replace("A", "B");
     }
 
     private String replaceCtoB(String target) {
-        String replaced = target.replace("C", "B");
-        return replaced;
+        return target.replace("C", "B");
     }
 
     private String addPrefix(String str1, String str2) {
-        String concat = str1 + ":" + str2;
-        return concat;
+        return str1 + ":" + str2;
     }
 
     private boolean isAvailableLogging() {
