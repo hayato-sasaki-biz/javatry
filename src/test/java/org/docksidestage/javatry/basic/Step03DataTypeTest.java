@@ -69,20 +69,20 @@ public class Step03DataTypeTest extends PlainTestCase {
         float dstore = 2147483647.1f;
         double amba = 2.3d;
         char miraco = 'a';
-        boolean dohotel = miraco == 'a';
-        if (dohotel && dstore >= piari) {
-            bonvo = sea;
-            land = (short) bonvo;
-            bonvo = piari;
-            sea = (byte) land;
-            if (amba == 2.3D) {
-                sea = (byte) amba;
+        boolean dohotel = miraco == 'a';    // dohotel => true
+        if (dohotel && dstore >= piari) {   // ()の中身: true & true => true
+            bonvo = sea;            // sea:byte, bonvo:long,        bonvo => 127L
+            land = (short) bonvo;   // bonvo:long, land: short,     land => 127
+            bonvo = piari;          // piari:int, bonvo:long,       bonvo => 2147483647
+            sea = (byte) land;      // land: short, sea: byte       sea => 127
+            if (amba == 2.3D) {     // ()の中身: true
+                sea = (byte) amba;  // sea => 2
             }
         }
-        if (dstore > piari) {
+        if (dstore > piari) {       // ()の中身: false, 理由: dstoreとpiariを比較するとequal
             sea = 0;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 2
     }
 
     // ===================================================================================
