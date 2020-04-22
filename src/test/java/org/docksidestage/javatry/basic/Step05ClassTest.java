@@ -60,7 +60,9 @@ public class Step05ClassTest extends PlainTestCase {
     public void test_class_howToUse_nosales() {
         TicketBooth booth = new TicketBooth();
         Integer sea = booth.getSalesProceeds();
-        log(sea); // your answer? => 
+        // Note: TicketBoothの定義を見ると..
+        // - インスタンス変数salesProceedsの初期値はnull(初期値を宣言していない)
+        log(sea); // your answer? => null
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
