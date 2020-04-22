@@ -218,12 +218,25 @@ public class Step02IfForTest extends PlainTestCase {
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
      * your question here (ここにあなたの質問を):
-     * 
+     *
+     * What string is sea variable at the method end? <br>
+     * (メソッド終了時の変数 sea の中身は？)
+     *
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_iffor_yourExercise() {
-        // write your code here
+        List<String> stageList = prepareStageList();
+        String sea = null;
+        for (String stage : stageList) {
+            if (stage.contains("o")) {
+                sea += stage;
+            }
+            if (stage.endsWith("r")) {
+                break;
+            }
+        }
+        log(sea);   // your answer? =>
     }
 
     // ===================================================================================
