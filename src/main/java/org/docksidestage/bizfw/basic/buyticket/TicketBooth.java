@@ -50,10 +50,11 @@ public class TicketBooth {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
         --quantity;     // NOTE: 例外処理の後でquantityを-1する
+        // ↓ salesProceedsの増分をONE_DAY_PRICEに修正
         if (salesProceeds != null) {
-            salesProceeds = salesProceeds + handedMoney;
+            salesProceeds = salesProceeds + ONE_DAY_PRICE;
         } else {
-            salesProceeds = handedMoney;
+            salesProceeds = ONE_DAY_PRICE;
         }
     }
 

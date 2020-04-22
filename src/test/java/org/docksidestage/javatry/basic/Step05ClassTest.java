@@ -53,7 +53,7 @@ public class Step05ClassTest extends PlainTestCase {
         // Note: TicketBoothの定義を見ると..
         // 1. インスタンス変数salesProceedsの初期値はnull
         // 2. salesProceedsがnullの状態でbuyOneDayPassportを呼ぶとhandedMoneyがsalesProceedsに代入される
-        log(sea); // your answer? => 10000
+        log(sea); // your answer? => 7400
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
