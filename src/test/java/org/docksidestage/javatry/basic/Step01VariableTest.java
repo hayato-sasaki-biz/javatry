@@ -223,11 +223,19 @@ public class Step01VariableTest extends PlainTestCase {
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
      * your question here (ここにあなたの質問を):
+     *
+     * What string is sea variable at the method end? <br>
+     * (メソッド終了時の変数 sea の中身は？)
      * 
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_variable_yourExercise() {
-        // write your code here
+        // int型とfloat型の足し算, キャストについて
+        int land = 1;
+        float sea = 2e-1f;
+        land += sea;
+        sea = (float) land;
+        log(sea);
     }
 }
