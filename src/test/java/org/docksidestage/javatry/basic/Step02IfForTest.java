@@ -62,13 +62,14 @@ public class Step02IfForTest extends PlainTestCase {
         if (sea > 904) {
             sea = 2001;
         } else if (sea >= 904) {
+            // このブロックが実行されて、log(sea)の行まで飛ぶ
             sea = 7;
         } else if (sea >= 903) {
             sea = 8;
         } else {
             sea = 9;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
