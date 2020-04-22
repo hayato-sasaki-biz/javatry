@@ -160,7 +160,8 @@ public class Step02IfForTest extends PlainTestCase {
             }
         });
         String sea = sb.toString();
-        log(sea); // your answer? => 
+        // ポイント: forEach()の引数はラムダ式(戻り値はvoid)
+        log(sea); // your answer? => dockside
     }
 
     // ===================================================================================
