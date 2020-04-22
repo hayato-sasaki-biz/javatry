@@ -41,10 +41,10 @@ public class Step04MethodTest extends PlainTestCase {
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_method_call_many() {
-        String sea = functionSomething("mystic");
-        consumeSomething(supplySomething());
-        runnableSomething();
-        log(sea); // your answer? => 
+        String sea = functionSomething("mystic"); // sea => mysmys
+        consumeSomething(supplySomething()); // 上の行のseaは変化しない
+        runnableSomething();    // logをするだけでseaは変化なし
+        log(sea); // your answer? => mysmys
     }
 
     private String functionSomething(String name) {
