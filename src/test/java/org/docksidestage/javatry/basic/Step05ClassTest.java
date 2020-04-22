@@ -50,7 +50,10 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
         Integer sea = booth.getSalesProceeds();
-        log(sea); // your answer? => 
+        // Note: TicketBoothの定義を見ると..
+        // 1. インスタンス変数salesProceedsの初期値はnull
+        // 2. salesProceedsがnullの状態でbuyOneDayPassportを呼ぶとhandedMoneyがsalesProceedsに代入される
+        log(sea); // your answer? => 10000
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
