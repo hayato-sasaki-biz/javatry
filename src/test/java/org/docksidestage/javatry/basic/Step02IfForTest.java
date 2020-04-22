@@ -141,7 +141,10 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-        log(sea); // your answer? => 
+        // ポイント:
+        // - continue: 次のループへジャンプ
+        // - break: ループから抜ける
+        log(sea); // your answer? => hangar
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
