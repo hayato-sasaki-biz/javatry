@@ -57,7 +57,9 @@ public class Step01VariableTest extends PlainTestCase {
         String land = "oneman";
         sea = land;
         land = land + "'s dreams";
-        log(sea); // your answer? => 
+        // ポイント: Stringは参照だがイミュータブルなので他の変数から変数への代入時に
+        //          新たな参照が生成される
+        log(sea); // your answer? => oneman
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
