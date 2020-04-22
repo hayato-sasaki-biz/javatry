@@ -22,7 +22,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author hayato.sasaki
  */
 public class Step04MethodTest extends PlainTestCase {
 
@@ -35,15 +35,16 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_call_basic() {
         String sea = supplySomething();
-        log(sea); // your answer? =>
+        // ポイント: Step04MethodTestのメソッドsupplySomething()が呼ばれている
+        log(sea); // your answer? => over
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_method_call_many() {
-        String sea = functionSomething("mystic");
-        consumeSomething(supplySomething());
-        runnableSomething();
-        log(sea); // your answer? => 
+        String sea = functionSomething("mystic"); // sea => mysmys
+        consumeSomething(supplySomething()); // 上の行のseaは変化しない
+        runnableSomething();    // logをするだけでseaは変化なし
+        log(sea); // your answer? => mysmys
     }
 
     private String functionSomething(String name) {
@@ -72,11 +73,12 @@ public class Step04MethodTest extends PlainTestCase {
         St4MutableStage mutable = new St4MutableStage();
         int sea = 904;
         boolean land = false;
-        helloMutable(sea - 4, land, mutable);
+        helloMutable(sea - 4, land, mutable);   // mutable.stage => mystic
         if (!land) {
-            sea = sea + mutable.getStageName().length();
+            // 上記のhelloMutableではlandに影響を与えないので!landはtrue
+            sea = sea + mutable.getStageName().length();    // mutable.stage.length() => 6
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 910
     }
 
     private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
@@ -108,14 +110,14 @@ public class Step04MethodTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_method_instanceVariable() {
         hasAnnualPassport = true;
-        int sea = inParkCount;
-        offAnnualPassport(hasAnnualPassport);
+        int sea = inParkCount;      // sea => 0
+        offAnnualPassport(hasAnnualPassport);   // インスタンス変数のhasAnnualPassportは変化なし
         for (int i = 0; i < 100; i++) {
             goToPark();
-        }
-        ++sea;
-        sea = inParkCount;
-        log(sea); // your answer? => 
+        }   // inParkCount => 100
+        ++sea;  // sea => 1
+        sea = inParkCount;  // sea => 100
+        log(sea); // your answer? => 100
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
@@ -152,12 +154,37 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // comment out after making these methods
-        //String replaced = replaceCtoB(replaceAtoB("ABC"));
-        //String sea = addPrefix("broadway", replaced);
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCtoB(replaceAtoB("ABC"));
+        String sea = addPrefix("broadway", replaced);
+        if (isAvailableLogging()) {
+            showSea(sea);
+        }
     }
 
     // write methods here
+    private boolean availableLogging = true;
+
+    private String replaceAtoB(String target) {
+        String replaced = target.replace("A", "B");
+        return replaced;
+    }
+
+    private String replaceCtoB(String target) {
+        String replaced = target.replace("C", "B");
+        return replaced;
+    }
+
+    private String addPrefix(String str1, String str2) {
+        String concat = str1 + ":" + str2;
+        return concat;
+    }
+
+    private boolean isAvailableLogging() {
+        return availableLogging;
+    }
+
+    private void showSea(String sea) {
+        log(sea);
+    }
+
 }
