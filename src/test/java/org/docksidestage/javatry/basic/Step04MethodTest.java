@@ -165,6 +165,9 @@ public class Step04MethodTest extends PlainTestCase {
     private boolean availableLogging = true;
 
     private String replaceAtoB(String target) {
+        // TODO この処理であれば replaced という変数に切り出さなくても問題なさそうです。 by subaru (2020/04/22)
+        // TODO target が null だったらどうなるか、そこも想定して実装してみましょう！ by subaru (2020/04/22)
+        // ↑ replaceBtoC、addPrefix メソッドについても同様に修正してください。
         String replaced = target.replace("A", "B");
         return replaced;
     }
