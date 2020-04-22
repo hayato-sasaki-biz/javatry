@@ -154,12 +154,37 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // comment out after making these methods
-        //String replaced = replaceCtoB(replaceAtoB("ABC"));
-        //String sea = addPrefix("broadway", replaced);
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCtoB(replaceAtoB("ABC"));
+        String sea = addPrefix("broadway", replaced);
+        if (isAvailableLogging()) {
+            showSea(sea);
+        }
     }
 
     // write methods here
+    private boolean availableLogging = true;
+
+    private String replaceAtoB(String target) {
+        String replaced = target.replace("A", "B");
+        return replaced;
+    }
+
+    private String replaceCtoB(String target) {
+        String replaced = target.replace("C", "B");
+        return replaced;
+    }
+
+    private String addPrefix(String str1, String str2) {
+        String concat = str1 + ":" + str2;
+        return concat;
+    }
+
+    private boolean isAvailableLogging() {
+        return availableLogging;
+    }
+
+    private void showSea(String sea) {
+        log(sea);
+    }
+
 }
