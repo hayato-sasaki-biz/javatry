@@ -92,7 +92,8 @@ public class Step03DataTypeTest extends PlainTestCase {
     public void test_datatype_object() {
         St3ImmutableStage stage = new St3ImmutableStage("hangar");
         String sea = stage.getStageName();
-        log(sea); // your answer? => 
+        // ポイント: コンストラクタで設定したインスタンス変数をgetStageNameメソッドで呼び出している
+        log(sea); // your answer? => hanger
     }
 
     private static class St3ImmutableStage {
