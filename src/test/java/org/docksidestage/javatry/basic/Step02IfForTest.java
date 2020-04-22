@@ -195,6 +195,8 @@ public class Step02IfForTest extends PlainTestCase {
     public void test_iffor_refactor_foreach_to_forEach() {
         List<String> stageList = prepareStageList();
         StringBuilder sb = new StringBuilder();
+        // TODO [発展] prepareStageList がどのような要素の List を返す時も対応するようにしてみよう by subaru (2020/04/22)
+        // 今回の実装だと 'ga' を含む文字列がなかった時に結果が変わってしまうはず。。
         stageList.forEach(stage -> {
             if (sb.length() > 0) {
                 // breakはできないのでsbにappendしたら何も実行しないようにする
