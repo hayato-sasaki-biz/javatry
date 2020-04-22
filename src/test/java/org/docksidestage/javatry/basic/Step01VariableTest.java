@@ -211,9 +211,16 @@ public class Step01VariableTest extends PlainTestCase {
      * o すべての変数をlog()でカンマ区切りの文字列で表示
      * </pre>
      */
+
+    private int piari;
+
     public void test_variable_writing() {
         // define variables here
         // TODO ここもやってみましょう！ by subaru (2020/04/22)
+        // => 追加しました！ by sasaki (2020/04/22)
+        String sea = "mystic";
+        Integer land = null;
+        log(sea, land, piari);  // 出力: mystic, null, 0
     }
 
     // ===================================================================================
