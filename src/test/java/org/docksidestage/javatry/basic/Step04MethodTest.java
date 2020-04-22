@@ -110,14 +110,14 @@ public class Step04MethodTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_method_instanceVariable() {
         hasAnnualPassport = true;
-        int sea = inParkCount;
-        offAnnualPassport(hasAnnualPassport);
+        int sea = inParkCount;      // sea => 0
+        offAnnualPassport(hasAnnualPassport);   // インスタンス変数のhasAnnualPassportは変化なし
         for (int i = 0; i < 100; i++) {
             goToPark();
-        }
-        ++sea;
-        sea = inParkCount;
-        log(sea); // your answer? => 
+        }   // inParkCount => 100
+        ++sea;  // sea => 1
+        sea = inParkCount;  // sea => 100
+        log(sea); // your answer? => 100
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
