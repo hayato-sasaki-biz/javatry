@@ -39,7 +39,10 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(7400);
         int sea = booth.getQuantity();
-        log(sea); // your answer? => 
+        // Note: TicketBoothの定義を見ると..
+        // 1. インスタンス変数quantityの初期値は10
+        // 2. buyOneDayPassportを呼ぶとquantityが-1される
+        log(sea); // your answer? => 9
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
