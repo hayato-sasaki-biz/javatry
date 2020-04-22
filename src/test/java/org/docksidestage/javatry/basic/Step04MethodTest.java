@@ -168,6 +168,8 @@ public class Step04MethodTest extends PlainTestCase {
         // DONE この処理であれば replaced という変数に切り出さなくても問題なさそうです。 by subaru (2020/04/22)
         // DONE target が null だったらどうなるか、そこも想定して実装してみましょう！ by subaru (2020/04/22)
         // ↑ replaceBtoC、addPrefix メソッドについても同様に修正してください。
+        // TODO [comment] Good です。 by subaru (2020/04/22)
+        // あとは少し好みですが、三項演算子を使うとよりシンプルにかけます。
         if (target == null) {
             return target;
         }
@@ -182,6 +184,16 @@ public class Step04MethodTest extends PlainTestCase {
     }
 
     private String addPrefix(String prefix, String text) {
+        // TODO [comment] この辺に疑問を持つのはすばらしいです！ by subaru (2020/04/22)
+        // null の時に何かを return するべきか例外を投げるべきか、考えることはめっちゃ大事です。
+        // 結論としては、そのメソッドの仕様によります。
+        // 基本的にこのメソッドの使用の仕方として、
+        // - null を代入することが想定されている -> （空文字など何かを）return する
+        // - null が引数で渡ってくることが想定されていない（異常系） -> 例外をスローする
+        // のように考えると良いと思います。
+        // 今回に関しては特に指定はないのでどれが正解ということはありません。
+        // 佐々木さんが考えるあるべき論で実装して大丈夫かと思います。
+
         // NOTE: prefixはnullではないと仮定 (この場合は例外を投げたほうが良い？)
         if (text == null) {
             // NOTE: textがnullの場合には空文字として扱う(本来ならtest_method_makingの目的に応じて扱いは変えるべき)

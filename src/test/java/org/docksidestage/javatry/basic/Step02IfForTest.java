@@ -127,7 +127,6 @@ public class Step02IfForTest extends PlainTestCase {
         // ポイント: foreach文の書式は for (型 Listの要素の変数名 : List)
         log(sea); // your answer? => magiclamp
     }
-
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_for_foreach_continueBreak() {
         List<String> stageList = prepareStageList();
@@ -211,6 +210,11 @@ public class Step02IfForTest extends PlainTestCase {
                 sb.append(stage);
             }
         });
+        // TODO 対応ありがとう。もう一息です。 by subaru (2020/04/22)
+        // 今回の対応でも結果としては同じだけど、もう少しシンプルにかけます。
+        // あまり特定のテストケースのとき、、といった if 文はできれば書きたくない。
+        // 仮実装としては全く問題ないけど、このままで終わらせると想定すべきケースが増えれば増えるほどコードも肥大化します。
+        // 元の test_for_foreach_continueBreak メソッドの処理と対応する形で書いた方が、間違えも少なくシンプルになります。
         String sea;
         if (sb.length() == 0) {
             // Note: forループが最後まで回ったらstageListの末尾の値をseaに代入
