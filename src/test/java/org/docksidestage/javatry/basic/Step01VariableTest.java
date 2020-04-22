@@ -57,7 +57,7 @@ public class Step01VariableTest extends PlainTestCase {
         String land = "oneman";
         sea = land;
         land = land + "'s dreams";
-        // TODO [comment] Good! by subaru (2020/04/22)
+        // DONE [comment] Good! by subaru (2020/04/22)
         // ポイント: Stringは参照だがイミュータブルなので他の変数から変数への代入時に
         //          新たな参照が生成される
         log(sea); // your answer? => oneman
@@ -216,7 +216,7 @@ public class Step01VariableTest extends PlainTestCase {
 
     public void test_variable_writing() {
         // define variables here
-        // TODO ここもやってみましょう！ by subaru (2020/04/22)
+        // DONE ここもやってみましょう！ by subaru (2020/04/22)
         // => 追加しました！ by sasaki (2020/04/22)
         String sea = "mystic";
         Integer land = null;
