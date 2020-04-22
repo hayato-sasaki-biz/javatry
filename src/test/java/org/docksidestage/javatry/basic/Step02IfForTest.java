@@ -124,7 +124,8 @@ public class Step02IfForTest extends PlainTestCase {
         for (String stage : stageList) {
             sea = stage;
         }
-        log(sea); // your answer? => 
+        // ポイント: foreach文の書式は for (型 Listの要素の変数名 : List)
+        log(sea); // your answer? => magiclamp
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
