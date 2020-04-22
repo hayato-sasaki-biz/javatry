@@ -79,7 +79,9 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land;
         sea = land.add(new BigDecimal(1));
         sea.add(new BigDecimal(1));
-        log(sea); // your answer? => 
+        // ポイント: BigDecimal型はイミュータブル
+        //          addされた変数自体の値は変わらない
+        log(sea); // your answer? => 416
     }
 
     // ===================================================================================
