@@ -81,8 +81,10 @@ public class Step02IfForTest extends PlainTestCase {
         } else if (land && sea >= 904) {
             sea = 7;
         } else if (sea >= 903 || land) {
+            // 1. このブロックを実行 ( || はORの論理演算子)
             sea = 8;
             if (!land) {
+                // 2. このブロックを実行( ! はNOTの論理演算子)
                 land = true;
             } else if (sea <= 903) {
                 sea++;
@@ -91,9 +93,11 @@ public class Step02IfForTest extends PlainTestCase {
             sea = 9;
         }
         if (land) {
+            // 3. このブロックを実行
             sea = 10;
         }
-        log(sea); // your answer? => 
+        // ポイント: 上のif...else...のブロックは1->2->3の順に実行される
+        log(sea); // your answer? => 10
     }
 
     // ===================================================================================
