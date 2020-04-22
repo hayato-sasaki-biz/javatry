@@ -178,7 +178,11 @@ public class Step01VariableTest extends PlainTestCase {
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
         helpMethodArgumentVariable(sea, land);
-        log(sea); // your answer? => 
+        // ポイント:
+        // 関数内でnew StringBuilderをした時点で下の２つのseaは別の参照になっている
+        // - test_variable_method_argument_variable_assignment内のsea
+        // - helpMethodArgumentVariable内のsea
+        log(sea); // your answer? => harbor
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
