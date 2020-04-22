@@ -119,7 +119,11 @@ public class Step01VariableTest extends PlainTestCase {
         instanceMagiclamp = "magician";
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
-        log(sea); // your answer? => 
+        // ポイント:
+        // 1. インスタンス変数 instanceBroadwayに"bigband"を代入
+        // 2. instanecDockside(初期値0)を+1
+        // 3. 関数スコープ内のinstanceMagiclampに "burn"を代入(インスタンス変数とは無関係)
+        log(sea); // your answer? => bigband|1|null|magician
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
