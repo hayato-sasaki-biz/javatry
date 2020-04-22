@@ -68,7 +68,8 @@ public class Step05ClassTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_class_howToUse_wrongQuantity() {
         Integer sea = doTest_class_ticket_wrongQuantity();
-        log(sea); // your answer? => 9
+        // Note: TicketBoost.buyOneDayPassport()を修正し、例外発生時にはquantityが減らないようになる
+        log(sea); // your answer? => 10
     }
 
     private Integer doTest_class_ticket_wrongQuantity() {
@@ -93,6 +94,7 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_letsFix_ticketQuantityReduction() {
         Integer sea = doTest_class_ticket_wrongQuantity();
+        // CHANGED: TicketBooth.buyOneDayPassport()の--quantityの位置を修正
         log(sea); // should be max quantity, visual check here
     }
 

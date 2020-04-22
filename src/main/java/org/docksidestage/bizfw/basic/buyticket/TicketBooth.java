@@ -46,10 +46,10 @@ public class TicketBooth {
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
-        --quantity;
         if (handedMoney < ONE_DAY_PRICE) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
+        --quantity;     // NOTE: 例外処理の後でquantityを-1する
         if (salesProceeds != null) {
             salesProceeds = salesProceeds + handedMoney;
         } else {
