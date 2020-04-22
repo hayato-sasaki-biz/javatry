@@ -68,16 +68,17 @@ public class Step05ClassTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_class_howToUse_wrongQuantity() {
         Integer sea = doTest_class_ticket_wrongQuantity();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 9
     }
 
     private Integer doTest_class_ticket_wrongQuantity() {
         TicketBooth booth = new TicketBooth();
         int handedMoney = 7399;
         try {
-            booth.buyOneDayPassport(handedMoney);
-            fail("always exception but none");
+            booth.buyOneDayPassport(handedMoney);   // Note: TicketShortMoneyExceptionがthrowされる
+            fail("always exception but none");      // Note: この行は実行されない
         } catch (TicketShortMoneyException continued) {
+            // Note: 例外がcatchされる
             log("Failed to buy one-day passport: money=" + handedMoney, continued);
         }
         return booth.getQuantity();
