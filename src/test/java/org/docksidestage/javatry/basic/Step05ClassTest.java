@@ -147,7 +147,8 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_return_ticket() {
         TicketBooth booth = new TicketBooth();
-        Ticket oneDayPassport = booth.buyOneDayPassport(10000);
+        TicketBuyResult oneDayPassportResult = booth.buyOneDayPassport(10000);
+        Ticket oneDayPassport = oneDayPassportResult.getTicket();
         log(oneDayPassport.getDisplayPrice()); // should be same as one-day price
         log(oneDayPassport.isAlreadyIn()); // should be false
         oneDayPassport.doInPark();
@@ -173,7 +174,20 @@ public class Step05ClassTest extends PlainTestCase {
      * (チケットをもらってもOneDayなのかTwoDayなのか区別が付きません。区別を付けられるメソッドを追加しましょう)
      */
     public void test_class_moreFix_type() {
-        // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        int handedMoney = 21000;
+        // まずはOneDayチケットを購入
+        TicketBuyResult oneDayPassportResult = booth.buyOneDayPassport(handedMoney);
+        Ticket oneDayPassport = oneDayPassportResult.getTicket();
+        int change = oneDayPassportResult.getChange();
+        log(String.format("Day of the 1st ticket: %d", oneDayPassport.getDisplayDay()));
+        // 続いてTwoDayチケットを購入 (お釣りを使って連続で購入)
+        TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(change);
+        Ticket twoDayPassport = twoDayPassportResult.getTicket();
+        change = twoDayPassportResult.getChange();
+        log(String.format("Day of the 2nd ticket: %d", twoDayPassport.getDisplayDay()));
+        // 最後に残ったお釣りの確認
+        log(String.format("Change = %d", change));
     }
 
     // ===================================================================================

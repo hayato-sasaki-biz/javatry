@@ -17,6 +17,7 @@ package org.docksidestage.bizfw.basic.buyticket;
 
 /**
  * @author jflute
+ * @author hayato.sasaki
  */
 public class Ticket {
 
@@ -24,13 +25,15 @@ public class Ticket {
     //                                                                           Attribute
     //                                                                           =========
     private final int displayPrice;
+    private final int displayDay;
     private boolean alreadyIn;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public Ticket(int displayPrice) {
+    public Ticket(int displayPrice, int displayDay) {
         this.displayPrice = displayPrice;
+        this.displayDay = displayDay;
     }
 
     // ===================================================================================
@@ -48,6 +51,10 @@ public class Ticket {
     //                                                                            ========
     public int getDisplayPrice() {
         return displayPrice;
+    }
+
+    public int getDisplayDay() {
+        return displayDay;
     }
 
     public boolean isAlreadyIn() {
