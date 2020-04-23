@@ -32,9 +32,14 @@ public interface Ticket {
     //                                                                            ========
     int getDisplayPrice();
     int getDisplayDay();
-    // TODO sasaki AlreadyIn というのが何を示すものなのか？要件が曖昧ですが...MultipleDaysTicketを見ると、完全消化したらtrueという実装なので... by jflute (2020/04/23)
+    // TODO done sasaki AlreadyIn というのが何を示すものなのか？要件が曖昧ですが...MultipleDaysTicketを見ると、完全消化したらtrueという実装なので... by jflute (2020/04/23)
     // そういったことをインターフェースのメソッドのJavaDocコメントで書いておくと良いです。
     // わかりきってるメソッドはコメントなくてもって感じですが、解釈が分かれそうなものは、しっかりコメント書いておきましょう。
     // (まあ、メソッド名を変えるというのも手ですが...)
+
+    /**
+     * チケットが消化済みかどうか
+     * @return チケットを完全消化したらtrue
+     */
     boolean isAlreadyIn();
 }
