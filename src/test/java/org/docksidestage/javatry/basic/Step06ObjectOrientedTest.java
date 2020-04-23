@@ -205,9 +205,15 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Dog dog = new Dog();
         BarkedSound sound = dog.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        // NOTE: DogでオーバーライドしているgetBarkWordから 鳴き声は"wan"
+        log(sea); // your answer? => "wan"
         int land = dog.getHitPoint();
-        log(land); // your answer? => 
+        // NOTE: Animalを見るとbark()の中で..
+        // 1. breatheIn
+        // 2. prepareAbdominalMuscle
+        // 3. doBark
+        // の3回hitPointが-1されている
+        log(land); // your answer? => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
