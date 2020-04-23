@@ -106,9 +106,9 @@ public class TicketBooth {
         if (price == null) {
             // TODO done sasaki SetはGeneric型がひつようなので、Set<Integer> などで受け取ってください by jflute (2020/04/23)
             Set<Integer> daySet = PRICES.keySet();
-            // TODO sasaki toString()しなくても、文字列と連結するだけで自然とtoString()されます by jflute (2020/04/23)
+            // TODO done sasaki toString()しなくても、文字列と連結するだけで自然とtoString()されます by jflute (2020/04/23)
             //  e.g. ...following: " + daySet);
-            throw new TicketInvalidDayException("Day of ticket should be either of the following: " + daySet.toString());
+            throw new TicketInvalidDayException("Day of ticket should be either of the following: " + daySet);
         }
         return (int) price;
     }
