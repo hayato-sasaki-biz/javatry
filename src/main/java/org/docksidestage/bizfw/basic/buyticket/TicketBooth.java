@@ -43,36 +43,44 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                          Buy Ticket
     //                                                                          ==========
-    public void buyOneDayPassport(int handedMoney) {
+
+    // buyOneDayPassportとbuyTwoDayPassportを一般化
+    private int buyPassport(int handedMoney, int day) {
+        // チケットの価格の設定とDayに関する例外処理
+        int price;
+        switch (day) {
+        case 1:
+            price = ONE_DAY_PRICE;
+            break;
+        case 2:
+            price = TWO_DAY_PRICE;
+            break;
+        default:
+            // 購入チケット数numTicketに関する例外処理
+            throw new TicketInvalidDayException("Day of ticket should be 1 or 2");
+        }
+
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
-        if (handedMoney < ONE_DAY_PRICE) {
-            throw new TicketShortMoneyException("Short money: " + handedMoney);
-        }
-        --quantity;     // NOTE: 例外処理の後でquantityを-1する
-        // ↓ salesProceedsの増分をONE_DAY_PRICEに修正
-        if (salesProceeds != null) {
-            salesProceeds = salesProceeds + ONE_DAY_PRICE;
-        } else {
-            salesProceeds = ONE_DAY_PRICE;
-        }
-    }
-
-    public int buyTwoDayPassport(int handedMoney) {
-        if (quantity <= 0) {    // Note: 現状ではOneDay,TwoDayのチケット数は区別しない
-            throw new TicketSoldOutException("Sold out");
-        }
-        if (handedMoney < TWO_DAY_PRICE) {
+        if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
         --quantity;
         if (salesProceeds != null) {
-            salesProceeds = salesProceeds + TWO_DAY_PRICE;
+            salesProceeds = salesProceeds + price;
         } else {
-            salesProceeds = TWO_DAY_PRICE;
+            salesProceeds = price;
         }
-        return handedMoney - TWO_DAY_PRICE;     // お釣りを返す
+        return handedMoney - price;     // お釣りを返す
+    }
+
+    public void buyOneDayPassport(int handedMoney) {
+        buyPassport(handedMoney, 1);    // NOTE: 本来はお釣りを返すべきだが,元の定義でvoidだったのでそのまま
+    }
+
+    public int buyTwoDayPassport(int handedMoney) {
+        return buyPassport(handedMoney, 2);
     }
 
     public static class TicketSoldOutException extends RuntimeException {
@@ -89,6 +97,16 @@ public class TicketBooth {
         private static final long serialVersionUID = 1L;
 
         public TicketShortMoneyException(String msg) {
+            super(msg);
+        }
+    }
+
+    // buyPassportでdayの値が不正だった場合の例外
+    public static class TicketInvalidDayException extends RuntimeException {
+
+        private static final long serialVersionUID = 1L;
+
+        public TicketInvalidDayException(String msg) {
             super(msg);
         }
     }
