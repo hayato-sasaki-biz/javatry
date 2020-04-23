@@ -75,8 +75,9 @@ public class TicketBooth {
         return handedMoney - price;     // お釣りを返す
     }
 
-    public void buyOneDayPassport(int handedMoney) {
-        buyPassport(handedMoney, 1);    // NOTE: 本来はお釣りを返すべきだが,元の定義でvoidだったのでそのまま
+    public Ticket buyOneDayPassport(int handedMoney) {
+        buyPassport(handedMoney, 1);
+        return new Ticket(ONE_DAY_PRICE);
     }
 
     public int buyTwoDayPassport(int handedMoney) {
