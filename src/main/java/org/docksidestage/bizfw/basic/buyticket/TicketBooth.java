@@ -78,7 +78,7 @@ public class TicketBooth {
         }
 
         // 支払い金額のチェック
-        final int price = getTicketPrice(day);
+        final int price = deriveTicketPrice(day);
         if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
@@ -97,10 +97,10 @@ public class TicketBooth {
         return new TicketBuyResult(ticket, change);
     }
 
-    // TODO sasaki getは曖昧な言葉(最終手段or本当に取るだけ)なので、できるだけ何か意味のある単語を by jflute (2020/04/23)
+    // TODO done sasaki getは曖昧な言葉(最終手段or本当に取るだけ)なので、できるだけ何か意味のある単語を by jflute (2020/04/23)
     // 例えば、dayからPriceを導いているので... deriveTicketPrice() とか。探していることを強調したければ findTicketPrice() とか。
     // 動詞の語彙力も大切です。まあ、プログラミングでよく使われる動詞ってのもあるので、たくさんソースコード読むことですね。
-    private int getTicketPrice(int day) {
+    private int deriveTicketPrice(int day) {
         // チケットの価格の設定とDayに関する例外処理
         Integer price = PRICES.get(day);
         if (price == null) {
