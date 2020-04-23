@@ -171,6 +171,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         // [final process]
         //
         saveBuyingHistory(booth, ticket);
+        // Note: オブジェクトとはなにか？について
+        // - attributeとmethodを持つオブジェクトが互いにコミュニケーションを取りながら、状態が変化していく
+        // - 一つ前のテストメソッドではたくさんの変数が存在し、それぞれの役割が曖昧になっている
+        // - オブジェクト同士の責任分担がうまくできていると、コーディング時に注目すべき状態がコンパクトにすむ
+        //   (状態の次数が増えるとバグの可能性は一気に上がるはず)
     }
 
     private void saveBuyingHistory(TicketBooth booth, Ticket ticket) {
