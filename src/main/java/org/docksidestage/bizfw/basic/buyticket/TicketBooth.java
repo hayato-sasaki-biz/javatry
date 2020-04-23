@@ -28,11 +28,16 @@ public class TicketBooth {
     //                                                                          Definition
     //                                                                          ==========
     private static final int MAX_QUANTITY = 10;
-    private static final HashMap<Integer, Integer> PRICES = new HashMap<Integer, Integer>() {{
-        put(1, 7400);
-        put(2, 13200);
-        put(4, 22400);
-    }};
+    // TODO sasaki まだわからないかもですが、インターフェースで受けましょう。ここだとMap型 by jflute (2020/04/23)
+    // Mapを使うがわからしたら、Hashで作られたMapかどうかは気にしないので、純粋にMapというオブジェクトで扱いたいです。
+    // (Step6のポリモーフィズムのところに関連、いまあんまりわからなくてもOK)
+    private static final HashMap<Integer, Integer> PRICES = new HashMap<Integer, Integer>() {
+        {
+            put(1, 7400);
+            put(2, 13200);
+            put(4, 22400);
+        }
+    };
 
     // ===================================================================================
     //                                                                           Attribute
@@ -49,9 +54,11 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                          Buy Ticket
     //                                                                          ==========
-
+    // TODO sasaki 再利用するprivateメソッドは、利用する側のメソッドの下に宣言する習慣があるので移動してみてください(現場にも寄りますが) by jflute (2020/04/23)
+    // TODO sasaki Slackのtipsスレッドで書いたように、privateの実処理メソッドは doBuy...() にした方が区別がつきやすいです by jflute (2020/04/23)
     // buyOneDayPassportやbuyTwoDayPassportを一般化
     private TicketBuyResult buyPassport(int handedMoney, int day) {
+        // TODO sasaki まとまった処理ごとに概要コメントがあるのいいですね。複数の処理が一つになって一つの業務をおこなっているわけですからね by jflute (2020/04/23)
         // 売り切れチェック
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
@@ -77,11 +84,17 @@ public class TicketBooth {
         return new TicketBuyResult(ticket, change);
     }
 
+    // TODO sasaki getは曖昧な言葉(最終手段or本当に取るだけ)なので、できるだけ何か意味のある単語を by jflute (2020/04/23)
+    // 例えば、dayからPriceを導いているので... deriveTicketPrice() とか。探していることを強調したければ findTicketPrice() とか。
+    // 動詞の語彙力も大切です。まあ、プログラミングでよく使われる動詞ってのもあるので、たくさんソースコード読むことですね。
     private int getTicketPrice(int day) {
         // チケットの価格の設定とDayに関する例外処理
         Integer price = PRICES.get(day);
         if (price == null) {
+            // TODO sasaki SetはGeneric型がひつようなので、Set<Integer> などで受け取ってください by jflute (2020/04/23)
             Set daySet = PRICES.keySet();
+            // TODO sasaki toString()しなくても、文字列と連結するだけで自然とtoString()されます by jflute (2020/04/23)
+            //  e.g. ...following: " + daySet);
             throw new TicketInvalidDayException("Day of ticket should be either of the following: " + daySet.toString());
         }
         return (int) price;
@@ -117,6 +130,7 @@ public class TicketBooth {
         }
     }
 
+    // TODO sasaki [いいね] 日本語のコメントGood. ちゃんと真似て独自例外を作ってるのもGood by jflute (2020/04/23)
     // buyPassportでdayの値が不正だった場合の例外
     public static class TicketInvalidDayException extends RuntimeException {
 

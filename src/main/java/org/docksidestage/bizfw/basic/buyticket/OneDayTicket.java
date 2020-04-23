@@ -10,6 +10,8 @@ public class OneDayTicket implements Ticket {
     //                                                                           Attribute
     //                                                                           =========
     private final int displayPrice;
+    // TODO sasaki この場合は、インスタンスに依存せず完全なる定数なので、static final の定数にしてしまいましょう by jflute (2020/04/23)
+    // (static finalのものは、Attribute じゃなくて、Definition というタグコメントをよく使います)
     private final int displayDay = 1;
     private boolean alreadyIn;
 
