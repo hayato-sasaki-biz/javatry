@@ -80,8 +80,10 @@ public class TicketBooth {
         return new Ticket(ONE_DAY_PRICE);
     }
 
-    public int buyTwoDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 2);
+    public TicketBuyResult buyTwoDayPassport(int handedMoney) {
+        int change = buyPassport(handedMoney, 2);
+        Ticket ticket = new Ticket(TWO_DAY_PRICE);
+        return new TicketBuyResult(ticket, change);
     }
 
     public static class TicketSoldOutException extends RuntimeException {
