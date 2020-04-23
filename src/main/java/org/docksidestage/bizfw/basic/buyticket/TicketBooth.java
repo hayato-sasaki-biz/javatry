@@ -15,6 +15,9 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * @author jflute
  * @author hayato.sasaki
@@ -25,8 +28,11 @@ public class TicketBooth {
     //                                                                          Definition
     //                                                                          ==========
     private static final int MAX_QUANTITY = 10;
-    private static final int ONE_DAY_PRICE = 7400; // when 2019/06/15
-    private static final int TWO_DAY_PRICE = 13200; // when 2020/04/22
+    private static final HashMap<Integer, Integer> PRICES = new HashMap<Integer, Integer>() {{
+        put(1, 7400);
+        put(2, 13200);
+        put(4, 22400);
+    }};
 
     // ===================================================================================
     //                                                                           Attribute
@@ -44,28 +50,20 @@ public class TicketBooth {
     //                                                                          Buy Ticket
     //                                                                          ==========
 
-    // buyOneDayPassportとbuyTwoDayPassportを一般化
-    private int buyPassport(int handedMoney, int day) {
-        // チケットの価格の設定とDayに関する例外処理
-        int price;
-        switch (day) {
-        case 1:
-            price = ONE_DAY_PRICE;
-            break;
-        case 2:
-            price = TWO_DAY_PRICE;
-            break;
-        default:
-            // 購入チケット数numTicketに関する例外処理
-            throw new TicketInvalidDayException("Day of ticket should be 1 or 2");
-        }
-
+    // buyOneDayPassportやbuyTwoDayPassportを一般化
+    private TicketBuyResult buyPassport(int handedMoney, int day) {
+        // 売り切れチェック
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
+
+        // 支払い金額のチェック
+        final int price = getTicketPrice(day);
         if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
+
+        // 購入処理
         --quantity;
         if (salesProceeds != null) {
             salesProceeds = salesProceeds + price;
@@ -73,25 +71,32 @@ public class TicketBooth {
             salesProceeds = price;
         }
 
-        return handedMoney - price;
+        // チケットとお釣りの準備
+        int change = handedMoney - price;
+        Ticket ticket = day == 1 ? new OneDayTicket(price) : new MultipleDaysTicket(price, day);
+        return new TicketBuyResult(ticket, change);
+    }
+
+    private int getTicketPrice(int day) {
+        // チケットの価格の設定とDayに関する例外処理
+        Integer price = PRICES.get(day);
+        if (price == null) {
+            Set daySet = PRICES.keySet();
+            throw new TicketInvalidDayException("Day of ticket should be either of the following: " + daySet.toString());
+        }
+        return (int) price;
     }
 
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
-        int change = buyPassport(handedMoney, 1);
-        Ticket ticket = new OneDayTicket(ONE_DAY_PRICE);
-        return new TicketBuyResult(ticket, change);
+        return buyPassport(handedMoney, 1);
     }
 
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
-        int change = buyPassport(handedMoney, 2);
-        Ticket ticket = new TwoDayTicket(TWO_DAY_PRICE);
-        return new TicketBuyResult(ticket, change);
+        return buyPassport(handedMoney, 2);
     }
 
     public TicketBuyResult buyFourDayPassport(int handedMoney) {
-        int change = buyPassport(handedMoney, 4);
-        Ticket ticket = new FourDayTicket(FOUR_DAY_PRICE);
-        return new TicketBuyResult(ticket, change);
+        return buyPassport(handedMoney, 4);
     }
 
     public static class TicketSoldOutException extends RuntimeException {

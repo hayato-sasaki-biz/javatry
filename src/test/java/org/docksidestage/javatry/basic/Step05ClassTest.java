@@ -261,7 +261,10 @@ public class Step05ClassTest extends PlainTestCase {
      * Refactor if you want to fix (e.g. is it well-balanced name of method and variable?). <br>
      * (その他、気になるところがあったらリファクタリングしてみましょう (例えば、バランスの良いメソッド名や変数名になっていますか？))
      */
+    // Note: チケットの金額をHashMapで管理するようにリファクタリング
+    // Note: TwoDayTicketやFourDayTicketをMultipleDaysTicketとして一般化
     public void test_class_moreFix_yourRefactoring() {
         // write confirmation code here
+        test_class_moreFix_wonder();
     }
 }
