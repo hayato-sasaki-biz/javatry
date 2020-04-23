@@ -55,7 +55,19 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                          Buy Ticket
     //                                                                          ==========
-    // TODO sasaki 再利用するprivateメソッドは、利用する側のメソッドの下に宣言する習慣があるので移動してみてください(現場にも寄りますが) by jflute (2020/04/23)
+    public TicketBuyResult buyOneDayPassport(int handedMoney) {
+        return buyPassport(handedMoney, 1);
+    }
+
+    public TicketBuyResult buyTwoDayPassport(int handedMoney) {
+        return buyPassport(handedMoney, 2);
+    }
+
+    public TicketBuyResult buyFourDayPassport(int handedMoney) {
+        return buyPassport(handedMoney, 4);
+    }
+
+    // TODO done sasaki 再利用するprivateメソッドは、利用する側のメソッドの下に宣言する習慣があるので移動してみてください(現場にも寄りますが) by jflute (2020/04/23)
     // TODO sasaki Slackのtipsスレッドで書いたように、privateの実処理メソッドは doBuy...() にした方が区別がつきやすいです by jflute (2020/04/23)
     // buyOneDayPassportやbuyTwoDayPassportを一般化
     private TicketBuyResult buyPassport(int handedMoney, int day) {
@@ -101,17 +113,6 @@ public class TicketBooth {
         return (int) price;
     }
 
-    public TicketBuyResult buyOneDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 1);
-    }
-
-    public TicketBuyResult buyTwoDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 2);
-    }
-
-    public TicketBuyResult buyFourDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 4);
-    }
 
     public static class TicketSoldOutException extends RuntimeException {
 
