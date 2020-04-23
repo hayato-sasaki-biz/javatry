@@ -132,7 +132,7 @@ public class TicketBooth {
         }
     }
 
-    // TODO sasaki [いいね] 日本語のコメントGood. ちゃんと真似て独自例外を作ってるのもGood by jflute (2020/04/23)
+    // TODO done sasaki [いいね] 日本語のコメントGood. ちゃんと真似て独自例外を作ってるのもGood by jflute (2020/04/23)
     // doBuyPassportでdayの値が不正だった場合の例外
     public static class TicketInvalidDayException extends RuntimeException {
 
