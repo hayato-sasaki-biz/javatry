@@ -56,21 +56,21 @@ public class TicketBooth {
     //                                                                          Buy Ticket
     //                                                                          ==========
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 1);
+        return doBuyPassport(handedMoney, 1);
     }
 
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 2);
+        return doBuyPassport(handedMoney, 2);
     }
 
     public TicketBuyResult buyFourDayPassport(int handedMoney) {
-        return buyPassport(handedMoney, 4);
+        return doBuyPassport(handedMoney, 4);
     }
 
     // TODO done sasaki 再利用するprivateメソッドは、利用する側のメソッドの下に宣言する習慣があるので移動してみてください(現場にも寄りますが) by jflute (2020/04/23)
-    // TODO sasaki Slackのtipsスレッドで書いたように、privateの実処理メソッドは doBuy...() にした方が区別がつきやすいです by jflute (2020/04/23)
+    // TODO done sasaki Slackのtipsスレッドで書いたように、privateの実処理メソッドは doBuy...() にした方が区別がつきやすいです by jflute (2020/04/23)
     // buyOneDayPassportやbuyTwoDayPassportを一般化
-    private TicketBuyResult buyPassport(int handedMoney, int day) {
+    private TicketBuyResult doBuyPassport(int handedMoney, int day) {
         // TODO sasaki まとまった処理ごとに概要コメントがあるのいいですね。複数の処理が一つになって一つの業務をおこなっているわけですからね by jflute (2020/04/23)
         // 売り切れチェック
         if (quantity <= 0) {
@@ -133,7 +133,7 @@ public class TicketBooth {
     }
 
     // TODO sasaki [いいね] 日本語のコメントGood. ちゃんと真似て独自例外を作ってるのもGood by jflute (2020/04/23)
-    // buyPassportでdayの値が不正だった場合の例外
+    // doBuyPassportでdayの値が不正だった場合の例外
     public static class TicketInvalidDayException extends RuntimeException {
 
         private static final long serialVersionUID = 1L;
