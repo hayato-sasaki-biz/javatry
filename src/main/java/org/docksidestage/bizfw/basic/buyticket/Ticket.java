@@ -25,16 +25,16 @@ public interface Ticket {
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
-    // TODO sasaki interfaceは、publicのメソッドしか定義できなくて、publicを省略できます。みんなよく省略するので削除しちゃいましょう by jflute (2020/04/23)
-    public void doInPark();
+    // TODO done sasaki interfaceは、publicのメソッドしか定義できなくて、publicを省略できます。みんなよく省略するので削除しちゃいましょう by jflute (2020/04/23)
+    void doInPark();
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public int getDisplayPrice();
-    public int getDisplayDay();
+    int getDisplayPrice();
+    int getDisplayDay();
     // TODO sasaki AlreadyIn というのが何を示すものなのか？要件が曖昧ですが...MultipleDaysTicketを見ると、完全消化したらtrueという実装なので... by jflute (2020/04/23)
     // そういったことをインターフェースのメソッドのJavaDocコメントで書いておくと良いです。
     // わかりきってるメソッドはコメントなくてもって感じですが、解釈が分かれそうなものは、しっかりコメント書いておきましょう。
     // (まあ、メソッド名を変えるというのも手ですが...)
-    public boolean isAlreadyIn();
+    boolean isAlreadyIn();
 }
