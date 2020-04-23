@@ -88,6 +88,12 @@ public class TicketBooth {
         return new TicketBuyResult(ticket, change);
     }
 
+    public TicketBuyResult buyFourDayPassport(int handedMoney) {
+        int change = buyPassport(handedMoney, 4);
+        Ticket ticket = new FourDayTicket(FOUR_DAY_PRICE);
+        return new TicketBuyResult(ticket, change);
+    }
+
     public static class TicketSoldOutException extends RuntimeException {
 
         private static final long serialVersionUID = 1L;

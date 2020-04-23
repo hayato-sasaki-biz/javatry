@@ -237,6 +237,24 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_wonder() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult fourDayPassportResult = booth.buyFourDayPassport(30000);
+        Ticket fourDayPassport = fourDayPassportResult.getTicket();
+        log("Price for the ticket: " + fourDayPassport.getDisplayPrice());
+        log(fourDayPassport.isAlreadyIn()); // => false
+        log("-------");
+        for (int i = 0; i < 4; i++) {
+            fourDayPassport.doInPark();
+            log(fourDayPassport.isAlreadyIn()); // => false (最後だけtrue)
+        }
+        log("-------");
+        try {
+            fourDayPassport.doInPark();      // 既に4回入場しているので例外が発生する
+            log(fourDayPassport.isAlreadyIn());
+        } catch (IllegalStateException continued) {
+            // Note: 例外がcatchされる
+            log(continued.toString());
+        }
     }
 
     /**
