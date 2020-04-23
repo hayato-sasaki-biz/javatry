@@ -71,7 +71,7 @@ public class TicketBooth {
     // TODO done sasaki Slackのtipsスレッドで書いたように、privateの実処理メソッドは doBuy...() にした方が区別がつきやすいです by jflute (2020/04/23)
     // buyOneDayPassportやbuyTwoDayPassportを一般化
     private TicketBuyResult doBuyPassport(int handedMoney, int day) {
-        // TODO sasaki まとまった処理ごとに概要コメントがあるのいいですね。複数の処理が一つになって一つの業務をおこなっているわけですからね by jflute (2020/04/23)
+        // TODO done sasaki まとまった処理ごとに概要コメントがあるのいいですね。複数の処理が一つになって一つの業務をおこなっているわけですからね by jflute (2020/04/23)
         // 売り切れチェック
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
