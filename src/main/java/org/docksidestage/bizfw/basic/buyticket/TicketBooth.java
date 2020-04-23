@@ -16,6 +16,7 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -28,10 +29,10 @@ public class TicketBooth {
     //                                                                          Definition
     //                                                                          ==========
     private static final int MAX_QUANTITY = 10;
-    // TODO sasaki まだわからないかもですが、インターフェースで受けましょう。ここだとMap型 by jflute (2020/04/23)
+    // TODO done sasaki まだわからないかもですが、インターフェースで受けましょう。ここだとMap型 by jflute (2020/04/23)
     // Mapを使うがわからしたら、Hashで作られたMapかどうかは気にしないので、純粋にMapというオブジェクトで扱いたいです。
     // (Step6のポリモーフィズムのところに関連、いまあんまりわからなくてもOK)
-    private static final HashMap<Integer, Integer> PRICES = new HashMap<Integer, Integer>() {
+    private static final Map<Integer, Integer> PRICES = new HashMap<Integer, Integer>() {
         {
             put(1, 7400);
             put(2, 13200);
