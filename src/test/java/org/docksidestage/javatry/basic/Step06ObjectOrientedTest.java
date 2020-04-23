@@ -218,12 +218,13 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_objectOriented_polymorphism_2nd_asAbstract() {
-        Animal animal = new Dog();
+        Animal animal = new Dog();          // スーパークラスとして宣言
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => "wan"
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        log(land); // your answer? => 7
+        // NOTE: animal.bark()のDog実装がちゃんと呼び出されている
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
