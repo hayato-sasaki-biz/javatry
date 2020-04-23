@@ -104,8 +104,8 @@ public class TicketBooth {
         // チケットの価格の設定とDayに関する例外処理
         Integer price = PRICES.get(day);
         if (price == null) {
-            // TODO sasaki SetはGeneric型がひつようなので、Set<Integer> などで受け取ってください by jflute (2020/04/23)
-            Set daySet = PRICES.keySet();
+            // TODO done sasaki SetはGeneric型がひつようなので、Set<Integer> などで受け取ってください by jflute (2020/04/23)
+            Set<Integer> daySet = PRICES.keySet();
             // TODO sasaki toString()しなくても、文字列と連結するだけで自然とtoString()されます by jflute (2020/04/23)
             //  e.g. ...following: " + daySet);
             throw new TicketInvalidDayException("Day of ticket should be either of the following: " + daySet.toString());
