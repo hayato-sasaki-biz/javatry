@@ -179,7 +179,7 @@ public class Step04MethodTest extends PlainTestCase {
     }
 
     private String addPrefix(String prefix, String text) {
-        // TODO [comment] この辺に疑問を持つのはすばらしいです！ by subaru (2020/04/22)
+        // DONE [comment] この辺に疑問を持つのはすばらしいです！ by subaru (2020/04/22)
         // null の時に何かを return するべきか例外を投げるべきか、考えることはめっちゃ大事です。
         // 結論としては、そのメソッドの仕様によります。
         // 基本的にこのメソッドの使用の仕方として、
