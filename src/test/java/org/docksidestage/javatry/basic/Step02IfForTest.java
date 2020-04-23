@@ -198,30 +198,23 @@ public class Step02IfForTest extends PlainTestCase {
         // 今回の実装だと 'ga' を含む文字列がなかった時に結果が変わってしまうはず。。
         // NOTE: 'ga'を含まない場合の処理をforEach()の後に追加しました  by sasaki (2020/04/22)
         stageList.forEach(stage -> {
-            if (sb.length() > 0) {
-                // breakはできないのでsbにappendしたら何も実行しないようにする
+            if (sb.toString().contains("ga")) {
+                // sbの中身が"ga"を含む文字列になっていたらすぐにループを抜ける (breakの代わり)
                 return;
             }
             if (stage.startsWith("br")) {
                 // continueの代わりにreturn
                 return;
             }
-            if (stage.contains("ga")) {
-                sb.append(stage);
-            }
+            sb.replace(0, sb.length(), stage);      // sea = stage の代わりにreplace
         });
-        // TODO 対応ありがとう。もう一息です。 by subaru (2020/04/22)
+        // DONE 対応ありがとう。もう一息です。 by subaru (2020/04/22)
         // 今回の対応でも結果としては同じだけど、もう少しシンプルにかけます。
         // あまり特定のテストケースのとき、、といった if 文はできれば書きたくない。
         // 仮実装としては全く問題ないけど、このままで終わらせると想定すべきケースが増えれば増えるほどコードも肥大化します。
         // 元の test_for_foreach_continueBreak メソッドの処理と対応する形で書いた方が、間違えも少なくシンプルになります。
-        String sea;
-        if (sb.length() == 0) {
-            // Note: forループが最後まで回ったらstageListの末尾の値をseaに代入
-            sea = stageList.get(stageList.size() - 1);
-        } else {
-            sea = sb.toString();
-        }
+        // NOTE: forEach()内で、sbを毎回stageで置き換える処理に変更しました by sasaki (2020/04/23)
+        String sea = sb.toString();
         log(sea); // should be same as before-fix
     }
 
