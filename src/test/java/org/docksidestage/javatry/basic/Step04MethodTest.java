@@ -168,19 +168,14 @@ public class Step04MethodTest extends PlainTestCase {
         // DONE この処理であれば replaced という変数に切り出さなくても問題なさそうです。 by subaru (2020/04/22)
         // DONE target が null だったらどうなるか、そこも想定して実装してみましょう！ by subaru (2020/04/22)
         // ↑ replaceBtoC、addPrefix メソッドについても同様に修正してください。
-        // TODO [comment] Good です。 by subaru (2020/04/22)
+        // DONE [comment] Good です。 by subaru (2020/04/22)
         // あとは少し好みですが、三項演算子を使うとよりシンプルにかけます。
-        if (target == null) {
-            return target;
-        }
-        return target.replace("A", "B");
+        // NOTE 三項演算子を使った書き方に変更しました by sasaki (2020/04/23)
+        return target == null ? target : target.replace("A", "B");
     }
 
     private String replaceCtoB(String target) {
-        if (target == null) {
-            return target;
-        }
-        return target.replace("C", "B");
+        return target == null ? target : target.replace("C", "B");
     }
 
     private String addPrefix(String prefix, String text) {
@@ -195,11 +190,7 @@ public class Step04MethodTest extends PlainTestCase {
         // 佐々木さんが考えるあるべき論で実装して大丈夫かと思います。
 
         // NOTE: prefixはnullではないと仮定 (この場合は例外を投げたほうが良い？)
-        if (text == null) {
-            // NOTE: textがnullの場合には空文字として扱う(本来ならtest_method_makingの目的に応じて扱いは変えるべき)
-            return prefix + ":";
-        }
-        return prefix + ":" + text;
+        return text == null ? prefix + ":" : prefix + ":" + text;
     }
 
     private boolean isAvailableLogging() {
