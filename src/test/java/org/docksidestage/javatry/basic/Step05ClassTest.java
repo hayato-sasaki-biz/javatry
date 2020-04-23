@@ -16,6 +16,8 @@
 package org.docksidestage.javatry.basic;
 
 import org.docksidestage.bizfw.basic.buyticket.Ticket;
+import org.docksidestage.bizfw.basic.buyticket.OneDayTicket;
+//import org.docksidestage.bizfw.basic.buyticket.TwoDayTicket;
 import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth.TicketShortMoneyException;
@@ -150,9 +152,9 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBuyResult oneDayPassportResult = booth.buyOneDayPassport(10000);
         Ticket oneDayPassport = oneDayPassportResult.getTicket();
         log(oneDayPassport.getDisplayPrice()); // should be same as one-day price
-        log(oneDayPassport.isAlreadyIn()); // should be false
+        log(((OneDayTicket)oneDayPassport).isAlreadyIn()); // should be false
         oneDayPassport.doInPark();
-        log(oneDayPassport.isAlreadyIn()); // should be true
+        log(((OneDayTicket)oneDayPassport).isAlreadyIn()); // should be false
     }
 
     /**
@@ -211,6 +213,22 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_useInterface() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(20000);
+        Ticket twoDayPassport = twoDayPassportResult.getTicket();
+        log("Price for the ticket: " + twoDayPassport.getDisplayPrice());
+        log(twoDayPassport.isAlreadyIn()); // => false
+        twoDayPassport.doInPark();
+        log(twoDayPassport.isAlreadyIn()); // => false
+        twoDayPassport.doInPark();
+        log(twoDayPassport.isAlreadyIn()); // => true
+        try {
+            twoDayPassport.doInPark();      // 既に2回入場しているので例外が発生する
+            log(twoDayPassport.isAlreadyIn());
+        } catch (IllegalStateException continued) {
+            // Note: 例外がcatchされる
+            log(continued.toString());
+        }
     }
 
     /**

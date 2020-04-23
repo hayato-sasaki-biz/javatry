@@ -16,48 +16,17 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
 /**
- * @author jflute
  * @author hayato.sasaki
  */
-public class Ticket {
-
-    // ===================================================================================
-    //                                                                           Attribute
-    //                                                                           =========
-    private final int displayPrice;
-    private final int displayDay;
-    private boolean alreadyIn;
-
-    // ===================================================================================
-    //                                                                         Constructor
-    //                                                                         ===========
-    public Ticket(int displayPrice, int displayDay) {
-        this.displayPrice = displayPrice;
-        this.displayDay = displayDay;
-    }
-
+public interface Ticket {
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
-    public void doInPark() {
-        if (alreadyIn) {
-            throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
-        }
-        alreadyIn = true;
-    }
-
+    public void doInPark();
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public int getDisplayPrice() {
-        return displayPrice;
-    }
-
-    public int getDisplayDay() {
-        return displayDay;
-    }
-
-    public boolean isAlreadyIn() {
-        return alreadyIn;
-    }
+    public int getDisplayPrice();
+    public int getDisplayDay();
+    public boolean isAlreadyIn();
 }
