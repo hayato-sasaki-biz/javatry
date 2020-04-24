@@ -19,6 +19,7 @@ package org.docksidestage.bizfw.basic.buyticket;
  * @author hayato.sasaki
  */
 public interface Ticket {
+
     // done sasaki [いいね] タグコメント良いですね〜。必須ではないですけど、メソッドたちもカテゴリがあるので、しっかり意識するのは大切 by jflute (2020/04/23)
     // ぼくはタグコメントよく使います。
     // https://github.com/lastaflute/lastaflute-example-harbor/blob/master/src/main/java/org/docksidestage/mylasta/direction/HarborFwAssistantDirector.java#L57

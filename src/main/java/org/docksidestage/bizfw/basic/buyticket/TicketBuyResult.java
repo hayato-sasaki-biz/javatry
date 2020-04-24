@@ -1,11 +1,12 @@
 package org.docksidestage.bizfw.basic.buyticket;
 
-// TODO sasaki 細かいですが、MultipleDaysTicket では public class 宣言の直下は空行が空いてて、ここは空いてない by jflute (2020/04/24)
+// done sasaki 細かいですが、MultipleDaysTicket では public class 宣言の直下は空行が空いてて、ここは空いてない by jflute (2020/04/24)
 // そういった部分もできるだけ一貫性を持ってコードの体裁を整えていこう。こういう思想です。https://twitter.com/jflute/status/1164429226822385664
 /**
  * @author hayato.sasaki
  */
 public class TicketBuyResult {
+
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
