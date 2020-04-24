@@ -278,9 +278,14 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal animal = new Zombie();
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        // NOTE: ZombieクラスでgetBarkWordがoverrideされている
+        log(sea); // your answer? => "uooo"
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        // NOTE:
+        // Zombieクラスをみると...
+        // 1. getInitialHitPointがoverrideされている : hitPoint => -1
+        // 2. downHitPointがoverrideされている: hitPointは変化しない
+        log(land); // your answer? => -1
     }
 
     // ===================================================================================
