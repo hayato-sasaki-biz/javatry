@@ -67,8 +67,13 @@ public class Step21WordPoolTest extends PlainTestCase {
 
     public void test_findId() {
         // arrange
+        // NOTE
+        // バグの原因: pool.findIdの引数に、pool.wordMapに存在しないvalueを与えている("昂" と "昴" が 実は違う漢字になっている)
+        // 本質的な原因: findIdで例外処理をしていない(filter処理でstreamが空の場合の処理が必要)
+        // 今回の対処: for loop 内のassertEqualsを全てパスするために、words内の"昂"を"昴"に修正
         WordPool pool = new WordPool();
-        List<String> words = Arrays.asList("私", "柿", "荼", "昂");
+        log(pool.getWordsOnly());
+        List<String> words = Arrays.asList("私", "柿", "荼", "昴");
 
         for (int i = 0; i < words.size(); i++) {
             // act
