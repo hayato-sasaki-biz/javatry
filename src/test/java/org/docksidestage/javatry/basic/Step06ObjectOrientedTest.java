@@ -262,9 +262,15 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal animal = new Cat();
         BarkedSound sound = animal.bark();
         String sea = sound.getBarkWord();
-        log(sea); // your answer? => 
+        // NOTE: CatクラスでgetBarkWordがoverrideされている
+        log(sea); // your answer? => "nya-"
         int land = animal.getHitPoint();
-        log(land); // your answer? => 
+        // NOTE: Animal.bark()とCat.downHitPoint()から..
+        // 1. breatheIn     : hitPoint => 9
+        // 2. prepareAbdominalMuscle    : hitPoint => 7
+        // 3. doBark        : hitPoint => 5
+        // というようにhitPointが変化する
+        log(land); // your answer? => 5
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
