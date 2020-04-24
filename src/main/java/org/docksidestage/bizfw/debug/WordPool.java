@@ -40,7 +40,7 @@ public class WordPool {
                 .filter(entry -> entry.getValue().getWord().equals(word))
                 .map(Map.Entry::getKey)
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new NoSuchElementException("No such word: " + word));
     }
 
     public Word update(Long id, Word word) {

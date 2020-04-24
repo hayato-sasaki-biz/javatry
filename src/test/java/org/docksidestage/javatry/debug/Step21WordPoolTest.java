@@ -54,14 +54,8 @@ public class Step21WordPoolTest extends PlainTestCase {
         WordPool pool = new WordPool();
 
         // act
-        // NOTE  word "財布" はpoolに含まれていないのでasertTrueで停止しないように word "私" に変更
-        Map.Entry<Long, Word> actual = pool.create(new Language("日本語"), "私");
+        Map.Entry<Long, Word> actual = pool.create(new Language("日本語"), "財布");
         // assert
-        // NOTE Word同士の比較を行うためのequalsがoverrideされていない
-        // 対処としては
-        // 1. Wordにequalsを実装する(override)
-        // 2. WordのString表現を取り出して比較する
-        // 今回は他に与える影響を抑えるために2を採用
         assertTrue(pool.getWordsOnly().contains(actual.getValue().getWord()));
     }
 
