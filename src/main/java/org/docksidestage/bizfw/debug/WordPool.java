@@ -31,7 +31,9 @@ public class WordPool {
     }
 
     public Word find(String word) {
-        return wordMap.values().stream().filter(v -> v.getWord().equals(word)).findFirst().orElseThrow(NoSuchElementException::new);
+        return wordMap.values().stream().filter(v -> v.getWord().equals(word)).findFirst().orElseThrow(
+                () -> new NoSuchElementException("No such word : " + word)
+        );  // 例外メッセージを追加
     }
 
     public Long findId(String word) {
@@ -65,8 +67,15 @@ public class WordPool {
         return wordMap.get(id);
     }
 
-    public String replace(Long id, String word1, String word2) {
-        return wordMap.get(id).getWord().replace(word1, word2);
+    // 引数名を変更
+    // idが存在しない場合に例外を投げるように変更
+    // 新しく追加したWord.replaceWordを使うように変更
+    public String replace(Long id, String target, String replacement) {
+        Word replacedElem = wordMap.get(id);
+        if (replacedElem == null) {
+            throw new NoSuchElementException("No such id in wordMap : id = " + id);
+        }
+        return replacedElem.replaceWord(target, replacement);
     }
 
     public void delete(Long id) {

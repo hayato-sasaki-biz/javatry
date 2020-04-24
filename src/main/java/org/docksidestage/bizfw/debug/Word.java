@@ -2,6 +2,7 @@ package org.docksidestage.bizfw.debug;
 
 /**
  * @author zaya
+ * @author hayato.sasaki
  */
 public class Word {
     private Language language;
@@ -27,5 +28,11 @@ public class Word {
         } else {
             return true;
         }
+    }
+
+    // wordの中身を置き換えるメソッドを追加
+    public String replaceWord(String target, String replacement) {
+        word = word.replace(target, replacement);
+        return word;
     }
 }
