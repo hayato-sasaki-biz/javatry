@@ -9,8 +9,8 @@ public class OneDayTicket implements Ticket {
     // ===================================================================================
     //                                                                           Definition
     //                                                                           =========
-    // TODO sasaki [tips]static finalの定数っぽいものは、DISPLAY_DAY というように大文字にスネークケースにする慣習があるのでRenameしてみよう by jflute (2020/04/24)
-    private static final int displayDay = 1;
+    // done sasaki [tips]static finalの定数っぽいものは、DISPLAY_DAY というように大文字にスネークケースにする慣習があるのでRenameしてみよう by jflute (2020/04/24)
+    private static final int DISPLAY_DAY = 1;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -45,7 +45,7 @@ public class OneDayTicket implements Ticket {
     }
 
     public int getDisplayDay() {
-        return displayDay;
+        return DISPLAY_DAY;
     }
 
     public boolean isAlreadyIn() {
