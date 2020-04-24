@@ -293,11 +293,13 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     //                                                              ======================
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_objectOriented_polymorphism_interface_dispatch() {
+        // NOTE: AnimalはLoudableの実装 (Animalの子クラスのZombieも同様)
         Loudable loudable = new Zombie();
         String sea = loudable.soundLoudly();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => "uooo"
+        // NOTE: loudable を Zombieでキャストしないとbarkできない
         String land = ((Zombie) loudable).bark().getBarkWord();
-        log(land); // your answer? => 
+        log(land); // your answer? => "uooo"
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
