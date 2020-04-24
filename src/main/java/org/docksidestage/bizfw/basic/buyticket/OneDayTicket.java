@@ -9,13 +9,14 @@ public class OneDayTicket implements Ticket {
     // ===================================================================================
     //                                                                           Definition
     //                                                                           =========
+    // TODO sasaki [tips]static finalの定数っぽいものは、DISPLAY_DAY というように大文字にスネークケースにする慣習があるのでRenameしてみよう by jflute (2020/04/24)
     private static final int displayDay = 1;
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
     private final int displayPrice;
-    // TODO done sasaki この場合は、インスタンスに依存せず完全なる定数なので、static final の定数にしてしまいましょう by jflute (2020/04/23)
+    // done sasaki この場合は、インスタンスに依存せず完全なる定数なので、static final の定数にしてしまいましょう by jflute (2020/04/23)
     // (static finalのものは、Attribute じゃなくて、Definition というタグコメントをよく使います)
     private boolean alreadyIn;
 

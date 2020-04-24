@@ -19,20 +19,20 @@ package org.docksidestage.bizfw.basic.buyticket;
  * @author hayato.sasaki
  */
 public interface Ticket {
-    // TODO done sasaki [いいね] タグコメント良いですね〜。必須ではないですけど、メソッドたちもカテゴリがあるので、しっかり意識するのは大切 by jflute (2020/04/23)
+    // done sasaki [いいね] タグコメント良いですね〜。必須ではないですけど、メソッドたちもカテゴリがあるので、しっかり意識するのは大切 by jflute (2020/04/23)
     // ぼくはタグコメントよく使います。
     // https://github.com/lastaflute/lastaflute-example-harbor/blob/master/src/main/java/org/docksidestage/mylasta/direction/HarborFwAssistantDirector.java#L57
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
-    // TODO done sasaki interfaceは、publicのメソッドしか定義できなくて、publicを省略できます。みんなよく省略するので削除しちゃいましょう by jflute (2020/04/23)
+    // done sasaki interfaceは、publicのメソッドしか定義できなくて、publicを省略できます。みんなよく省略するので削除しちゃいましょう by jflute (2020/04/23)
     void doInPark();
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
     int getDisplayPrice();
     int getDisplayDay();
-    // TODO done sasaki AlreadyIn というのが何を示すものなのか？要件が曖昧ですが...MultipleDaysTicketを見ると、完全消化したらtrueという実装なので... by jflute (2020/04/23)
+    // done sasaki AlreadyIn というのが何を示すものなのか？要件が曖昧ですが...MultipleDaysTicketを見ると、完全消化したらtrueという実装なので... by jflute (2020/04/23)
     // そういったことをインターフェースのメソッドのJavaDocコメントで書いておくと良いです。
     // わかりきってるメソッドはコメントなくてもって感じですが、解釈が分かれそうなものは、しっかりコメント書いておきましょう。
     // (まあ、メソッド名を変えるというのも手ですが...)
