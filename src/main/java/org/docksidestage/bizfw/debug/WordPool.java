@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 /**
  * @author zaya
+ * @author hayato.sasaki
  */
 public class WordPool {
     private final Map<Long, Word> wordMap;
@@ -24,6 +25,11 @@ public class WordPool {
         return new AbstractMap.SimpleEntry<>(id, find(id));
     }
 
+    // NOTE 上のcreateで呼び出されているので、定義の位置を近くに移動
+    public Word find(Long id) {
+        return wordMap.get(id);     // NOTE removeからgetに修正
+    }
+
     public Word find(String word) {
         return wordMap.values().stream().filter(v -> v.getWord().equals(word)).findFirst().orElseThrow(NoSuchElementException::new);
     }
@@ -37,21 +43,18 @@ public class WordPool {
                 .get();
     }
 
-    public Word find(Long id) {
-        return wordMap.remove(id);
-    }
-
     public Word update(Long id, Word word) {
         wordMap.remove(id);
         wordMap.put(id, word);
         return wordMap.get(id);
     }
 
-    public Word update(String word1, String word2) {
-        Long id = findId(word1);
+    // NOTE: 修正前の引数 word1, word2はそれぞれの役割が分かりづらいので、名前を変更
+    public Word update(String oldWord, String newWord) {
+        Long id = findId(oldWord);
         Word word = wordMap.get(id);
         wordMap.remove(id);
-        wordMap.put(id, new Word(word.getLanguage(), word2));
+        wordMap.put(id, new Word(word.getLanguage(), newWord));
         return wordMap.get(id);
     }
 

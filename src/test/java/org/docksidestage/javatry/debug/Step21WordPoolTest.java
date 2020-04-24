@@ -91,7 +91,7 @@ public class Step21WordPoolTest extends PlainTestCase {
         Map.Entry<Long, Word> created = pool.create(new Language("日本語"), "つくえ");
 
         // act
-        Word result = pool.update("日本語", "つくえ", "ぼうし");
+        Word result = pool.update("日本語", "ぼうし", "つくえ");
 
         // assert
         assertEquals("ぼうし", result.getWord());
