@@ -306,9 +306,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
     public void test_objectOriented_polymorphism_interface_hierarchy() {
         Loudable loudable = new AlarmClock();
         String sea = loudable.soundLoudly();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => "jiri jiri jiri---"
         boolean land = loudable instanceof Animal;
-        log(land); // your answer? => 
+        // NOTE: AlarmClockはLoudableの実装でありAnimalとは無関係
+        log(land); // your answer? => false
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
