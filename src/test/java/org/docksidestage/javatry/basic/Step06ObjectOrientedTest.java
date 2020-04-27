@@ -317,9 +317,11 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
         Animal seaAnimal = new Cat();
         Animal landAnimal = new Zombie();
         boolean sea = seaAnimal instanceof FastRunner;
-        log(sea); // your answer? => 
+        // NOTE: CatはFastRunnerの実装 (+ Animalの子クラス)
+        log(sea); // your answer? => true
+        // NOTE: ZombieはAnimalの子クラスでありFastRunnerとは無関係
         boolean land = landAnimal instanceof FastRunner;
-        log(land); // your answer? => 
+        log(land); // your answer? => false
     }
 
     /**
