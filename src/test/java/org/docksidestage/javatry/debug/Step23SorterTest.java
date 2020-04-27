@@ -16,6 +16,7 @@ import org.junit.Assert;
  * Debug, fix the bug, make it green and save the world!
  * (テストの一部がバグ原因で落ちています。デバグして、バグを直して、テストを通るようにしてください。)
  * @author zaya
+ * @author hayato.sasaki
  */
 public class Step23SorterTest extends PlainTestCase {
 
@@ -26,6 +27,7 @@ public class Step23SorterTest extends PlainTestCase {
         // assert
         int rank = 0;
         for (Language language : languages) {
+            log("rank for {} : {}", language.getName(), language.getRank());
             assertTrue(rank < language.rank);
             rank = language.rank;
         }

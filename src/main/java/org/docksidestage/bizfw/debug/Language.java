@@ -2,12 +2,13 @@ package org.docksidestage.bizfw.debug;
 
 /**
  * @author zaya
+ * @author hayato.sasaki
  */
 public class Language {
     public String name;
     public String description = "";
     public int countries = 0;
-    public int rank;
+    public int rank = 1;    // rankのデフォルト値を設定
 
     public Language(String name) {
         this.name = name;
