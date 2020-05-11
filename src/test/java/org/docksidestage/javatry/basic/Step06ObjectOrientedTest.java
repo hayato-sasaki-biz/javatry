@@ -25,6 +25,10 @@ import org.docksidestage.bizfw.basic.objanimal.swimmer.Swimmer;
 import org.docksidestage.javatry.basic.st6.dbms.St6MySql;
 import org.docksidestage.javatry.basic.st6.dbms.St6PostgreSql;
 import org.docksidestage.javatry.basic.st6.dbms.St6RelationalDB;
+import org.docksidestage.javatry.basic.st6.os.St6Mac;
+import org.docksidestage.javatry.basic.st6.os.St6OldWindows;
+import org.docksidestage.javatry.basic.st6.os.St6OperationSystem;
+import org.docksidestage.javatry.basic.st6.os.St6Windows;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -396,6 +400,17 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_writing_specialization_extractToConcrete() {
         // your confirmation code here
+        String loginId = "sasaki";
+        String relativePath = "test_path";
+        // Mac
+        St6OperationSystem mac = new St6Mac(loginId);
+        log("User resource path (Mac) : " + mac.buildUserResourcePath(relativePath));
+        // Windows
+        St6OperationSystem windows = new St6Windows(loginId);
+        log("User resource path (Windows) : " + windows.buildUserResourcePath(relativePath));
+        // Old Windows
+        St6OperationSystem oldWindows = new St6OldWindows(loginId);
+        log("User resource path (OldWindows) : " + oldWindows.buildUserResourcePath(relativePath));
     }
 
     // ===================================================================================
