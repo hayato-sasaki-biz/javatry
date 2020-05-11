@@ -21,6 +21,7 @@ import org.docksidestage.bizfw.basic.objanimal.*;
 import org.docksidestage.bizfw.basic.objanimal.loud.AlarmClock;
 import org.docksidestage.bizfw.basic.objanimal.loud.Loudable;
 import org.docksidestage.bizfw.basic.objanimal.runner.FastRunner;
+import org.docksidestage.bizfw.basic.objanimal.swimmer.Swimmer;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -355,6 +356,12 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_polymorphism_makeInterface() {
         // your confirmation code here
+        Animal dolphin = new Dolphin();
+        // DolphinクラスがSwimmerを実装していることの確認
+        boolean isSwimmer = dolphin instanceof Swimmer;
+        log(isSwimmer);
+        // swimメソッドの確認
+        ((Swimmer) dolphin).swim();
     }
 
     // ===================================================================================
