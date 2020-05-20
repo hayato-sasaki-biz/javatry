@@ -422,6 +422,10 @@ public class Step06ObjectOrientedTest extends PlainTestCase {
      */
     public void test_objectOriented_writing_withDelegation() {
         // your confirmation code here
+        Dog dog = new Dog();
+        log("Hit point of dog (before bark) : " + dog.getHitPoint());
+        log("Bark word of dog: " + dog.bark().getBarkWord());
+        log("Hit point of dog (after bark) : " + dog.getHitPoint());
     }
 
     /**

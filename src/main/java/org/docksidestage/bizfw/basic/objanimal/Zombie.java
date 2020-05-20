@@ -30,6 +30,8 @@ public class Zombie extends Animal {
     //                                                                         Constructor
     //                                                                         ===========
     public Zombie() {
+        hitPoint = getInitialHitPoint();
+        barkingProcess = new ZombieBarkingProcess();
     }
 
     @Override
@@ -53,11 +55,6 @@ public class Zombie extends Animal {
     // ===================================================================================
     //                                                                               Bark
     //                                                                              ======
-    @Override
-    protected void breatheIn() {
-        super.breatheIn();
-        zombieDiary.countBreatheIn();
-    }
 
     @Override
     protected String getBarkWord() {

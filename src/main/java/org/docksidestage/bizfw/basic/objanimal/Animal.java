@@ -34,12 +34,14 @@ public abstract class Animal implements Loudable {
     //                                                                           Attribute
     //                                                                           =========
     protected int hitPoint;
+    protected BarkingProcess barkingProcess;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     public Animal() {
         hitPoint = getInitialHitPoint();
+        barkingProcess = new BarkingProcess();
     }
 
     protected int getInitialHitPoint() {
@@ -50,29 +52,13 @@ public abstract class Animal implements Loudable {
     //                                                                               Bark
     //                                                                              ======
     public BarkedSound bark() {
-        breatheIn();
-        prepareAbdominalMuscle();
-        String barkWord = getBarkWord();
-        BarkedSound barkedSound = doBark(barkWord);
-        return barkedSound;
-    }
-
-    protected void prepareAbdominalMuscle() {
-        logger.debug("...Using my abdominal muscle"); // dummy implementation
-        downHitPoint();
-    }
-
-    protected void breatheIn() {
-        logger.debug("...Breathing in"); // dummy implementation
-        downHitPoint();
+        // NOTE bark()はAnimalのhitPointを変化させる
+        // ここでは、Animalの他のプロセスもhitPointを変化させる可能性があると仮定し、
+        // BarkingProcessにはhitPointのフィールドをもたせていない(downHitPointはAnimalが持つべき)
+        return barkingProcess.letAnimalBark(this);
     }
 
     protected abstract String getBarkWord();
-
-    protected BarkedSound doBark(String barkWord) {
-        downHitPoint();
-        return new BarkedSound(barkWord);
-    }
 
     // ===================================================================================
     //                                                                           Hit Point
