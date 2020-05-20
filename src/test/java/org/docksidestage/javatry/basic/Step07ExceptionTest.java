@@ -216,7 +216,8 @@ public class Step07ExceptionTest extends PlainTestCase {
         try {
             helpThrowIllegalState();
         } catch (IllegalStateException e) {
-            throw new St7ConstructorChallengeException("Failed to do something.");
+            // NOTE 修正前はStackTraceを辿れなくなっていた
+            throw new St7ConstructorChallengeException("Failed to do something.", e);
         }
     }
 
