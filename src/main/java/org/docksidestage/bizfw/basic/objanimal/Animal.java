@@ -28,6 +28,7 @@ public abstract class Animal implements Loudable {
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
+    // TODO sasaki 細かいけど使ってないなら消してしまいましょう。 by subaru (2020/05/20)
     private static final Logger logger = LoggerFactory.getLogger(Animal.class);
 
     // ===================================================================================

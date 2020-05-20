@@ -29,6 +29,14 @@ public class Zombie extends Animal {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
+    // TODO getBarkingProcess メソッドを作るのがおすすめです。 by subaru (2020/05/20)
+    // 今回コンストラクタで Animal クラスと異なるのは barkingProcess だけのはずですが、hitPoint の処理も同じものを指定し直してまっています。
+    // 今回はコンストラクタの処理が少ないのでまだ良いですが、処理が多くなるとバグを生む原因になるので次のようにするのがおすすめです。
+    // public Animal() {
+    //   hitPoint = getInitialHitPoint();
+    //   barkingProcess = getBarkingProcess();
+    // }
+    // そして Zombie の実装時には getBarkingProcess メソッドをオーバーライドしてあげるだけで、実装としては完了します。
     public Zombie() {
         hitPoint = getInitialHitPoint();
         barkingProcess = new ZombieBarkingProcess();
