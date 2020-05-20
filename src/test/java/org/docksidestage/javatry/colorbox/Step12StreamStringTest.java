@@ -160,7 +160,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                         }
                 )
                 .map(colorBox -> colorBox.getColor())
-                .findFirst()
+                .findAny()
                 .orElse(null);
         if (color == null) {
             log("*not found");
@@ -189,7 +189,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                         }
                 )
                 .map(colorBox -> colorBox.getColor())
-                .findFirst()
+                .findAny()
                 .orElse(null);
         if (color == null) {
             log("*not found");
