@@ -51,7 +51,13 @@ public class Step07ExceptionTest extends PlainTestCase {
     public void test_exception_hierarchy_Runtime_instanceof_RuntimeException() {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof RuntimeException;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => true
+        // NOTE IllegalStateExceptionの継承関係は以下の通り
+        // java.lang.Object
+        //   java.lang.Throwable
+        //       java.lang.Exception
+        //           java.lang.RuntimeException
+        //               java.lang.IllegalStateException
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
