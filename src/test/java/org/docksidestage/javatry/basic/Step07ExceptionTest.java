@@ -107,8 +107,11 @@ public class Step07ExceptionTest extends PlainTestCase {
             log(file.getCanonicalPath());
         } catch (IOException error) {
             log(error.getMessage());
-            // TODO sasaki 警告が出ているのでこちら出ないように修正しましょう by subaru (2020/05/20)
-            log(error.getStackTrace());
+            // DONE sasaki 警告が出ているのでこちら出ないように修正しましょう by subaru (2020/05/20)
+            // NOTE 警告を消すために、Object[]へのキャストを行ったがRedundantと怒られたので、
+            // printStackTrace()を使うように変更しました by sasaki (2020/05/20)
+            // log((Object[]) error.getStackTrace());
+            error.printStackTrace();
         }
     }
 
