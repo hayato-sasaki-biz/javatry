@@ -86,7 +86,8 @@ public class Step07ExceptionTest extends PlainTestCase {
     public void test_exception_hierarchy_Throwable_instanceof_Exception() {
         Object exp = new Throwable("mystic");
         boolean sea = exp instanceof Exception;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => false
+        // NOTE ExceptionはThrowableのサブクラス
     }
 
     // ===================================================================================
