@@ -36,11 +36,15 @@ public abstract class Animal implements Loudable {
     //                                                                         ===========
     public Animal() {
         hitPoint = getInitialHitPoint();
-        barkingProcess = new BarkingProcess();
+        barkingProcess = getBarkingProcess();
     }
 
     protected int getInitialHitPoint() {
         return 10; // as default
+    }
+
+    protected BarkingProcess getBarkingProcess() {
+        return new BarkingProcess();
     }
 
     // ===================================================================================
