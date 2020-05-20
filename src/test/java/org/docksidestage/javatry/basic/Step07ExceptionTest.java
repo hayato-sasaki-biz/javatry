@@ -55,7 +55,7 @@ public class Step07ExceptionTest extends PlainTestCase {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof RuntimeException;
         log(sea); // your answer? => true
-        // TODO [comment] Good!! こういう調査はいいですね。 by subaru (2020/05/20)
+        // DONE [comment] Good!! こういう調査はいいですね。 by subaru (2020/05/20)
         // NOTE IllegalStateExceptionの継承関係は以下の通り
         // java.lang.Object
         //   java.lang.Throwable
