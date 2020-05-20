@@ -16,8 +16,6 @@
 package org.docksidestage.bizfw.basic.objanimal;
 
 import org.docksidestage.bizfw.basic.objanimal.loud.Loudable;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The object for animal(動物).
@@ -25,11 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class Animal implements Loudable {
 
-    // ===================================================================================
-    //                                                                          Definition
-    //                                                                          ==========
-    // TODO sasaki 細かいけど使ってないなら消してしまいましょう。 by subaru (2020/05/20)
-    private static final Logger logger = LoggerFactory.getLogger(Animal.class);
+    // DONE sasaki 細かいけど使ってないなら消してしまいましょう。 by subaru (2020/05/20)
 
     // ===================================================================================
     //                                                                           Attribute
