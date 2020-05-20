@@ -64,7 +64,7 @@ public class Step07ExceptionTest extends PlainTestCase {
     public void test_exception_hierarchy_Runtime_instanceof_Exception() {
         Object exp = new IllegalStateException("mystic");
         boolean sea = exp instanceof Exception;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => true
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
