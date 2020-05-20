@@ -128,9 +128,9 @@ public class Step07ExceptionTest extends PlainTestCase {
             Throwable cause = e.getCause();
             sea = cause.getMessage();
             land = cause.getClass().getSimpleName();
-            log(sea); // your answer? => 
-            log(land); // your answer? => 
-            log(e); // your answer? => 
+            log(sea); // your answer? => Failed to call the third help method: -1
+            log(land); // your answer? => IllegalArgumentException
+            log(e); // your answer? => NumberFormatException
         }
     }
 
