@@ -3,10 +3,10 @@ package org.docksidestage.bizfw.basic.objanimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO [質問回答1] BarkingProcess を別パッケージに分けるべきか？ by subaru (2020/05/20)
+// DONE [質問回答1] BarkingProcess を別パッケージに分けるべきか？ by subaru (2020/05/20)
 // これは org.docksidestage.bizfw.basic.objanimal に配置されているクラスの数や種類が多くなり、煩雑になってきたかどうかで判断すると良いと思います。
 // もしくは煩雑になることが目に見えているなら最初からパッケージを分けてしまっても良いです。
-// TODO [質問回答2] Animal.downHitPoint のアクセス修飾子はprotectedからpublicにしても良いのか？ by subaru (2020/05/20)
+// DONE [質問回答2] Animal.downHitPoint のアクセス修飾子はprotectedからpublicにしても良いのか？ by subaru (2020/05/20)
 // これは難しいよね。。
 // downHitPoint メソッドが Animal オブジェクトの内部処理であるのならやはり public にするべきではないです。
 // 一方で BarkingProcess を別パッケージにしたならば public にせざるを得ない、正直ジレンマです。
@@ -33,7 +33,7 @@ public class BarkingProcess {
     //                                                                      Bark processes
     //                                                                         ===========
     public BarkedSound letAnimalBark(Animal animal) {
-        // TODO [質問] breathIn, prepareAbdominalMuscle は BarkingProcess 以外では使われない想定ですか？ by subaru (2020/05/20)
+        // DONE [質問] breathIn, prepareAbdominalMuscle は BarkingProcess 以外では使われない想定ですか？ by subaru (2020/05/20)
         // そのように考えたプロセスとか聞いてみたいです。
         // NOTE [回答] 現状では使われない想定です。 by sasaki (2020/05/20)
         // breathIn, prepareAbdominalMuscleはあくまでもbarkのための内部プロセスと捉えました。
