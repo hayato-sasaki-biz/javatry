@@ -175,9 +175,10 @@ public class Step07ExceptionTest extends PlainTestCase {
             // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
             // What happens? Write situation and cause here. (何が起きた？状況と原因をここに書いてみましょう)
             // - - - - - - - - - -
-            //
-            //
-            //
+            // 1. ↑のtry文の new SupercarClient().buySupercar() から エラーが発生
+            // 2. SupercarClient.javaの34行目で 販売業者がsupercarを注文しようとしている
+            // 3. 顧客がsteering wheel is like seaというリクエストを出しているので、カタログのpiariをもとにsuparcarを製造
+            // 4. suparcarのハンドルを作るために特別なネジが必要だが、そこで指定されていたスペック{\(^_^)/}がネジを作るのに適していなかった
             // _/_/_/_/_/_/_/_/_/_/
         }
     }
