@@ -42,6 +42,8 @@ public class BarkingProcess {
         // - barkメソッドをもつ
         // の二点だと考え、barkの内部プロセスはBarkingProcessのような外部クラスに責任を譲渡したいと考えました。
         // breathInやprepareAbdominalMuscleが他で必要になったとしたら、そのときにリファクタリングすべき と考えたのも理由の一つです。
+        // TODO [comment] すばらしいです、ありがとう！ by subaru (2020/05/20)
+        // こちらは正解はないので、意図をもって書く事ができていれば OK です。
         breatheIn(animal);
         prepareAbdominalMuscle(animal);
         String barkWord = animal.getBarkWord();
