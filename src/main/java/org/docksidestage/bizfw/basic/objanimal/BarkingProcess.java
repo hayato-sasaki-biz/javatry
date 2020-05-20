@@ -35,6 +35,13 @@ public class BarkingProcess {
     public BarkedSound letAnimalBark(Animal animal) {
         // TODO [質問] breathIn, prepareAbdominalMuscle は BarkingProcess 以外では使われない想定ですか？ by subaru (2020/05/20)
         // そのように考えたプロセスとか聞いてみたいです。
+        // NOTE [回答] 現状では使われない想定です。 by sasaki (2020/05/20)
+        // breathIn, prepareAbdominalMuscleはあくまでもbarkのための内部プロセスと捉えました。
+        // さらに、AnimalをAnimalたらしめる要素が
+        // - hitPointという状態をもつ
+        // - barkメソッドをもつ
+        // の二点だと考え、barkの内部プロセスはBarkingProcessのような外部クラスに責任を譲渡したいと考えました。
+        // breathInやprepareAbdominalMuscleが他で必要になったとしたら、そのときにリファクタリングすべき と考えたのも理由の一つです。
         breatheIn(animal);
         prepareAbdominalMuscle(animal);
         String barkWord = animal.getBarkWord();
