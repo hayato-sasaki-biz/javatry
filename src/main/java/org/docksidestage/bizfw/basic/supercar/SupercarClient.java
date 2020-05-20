@@ -23,19 +23,26 @@ import org.docksidestage.bizfw.basic.supercar.SupercarManufacturer.Supercar;
 /**
  * The client(顧客) of supercar.
  * @author jflute
+ * @author hayato.sasaki
  */
 public class SupercarClient {
 
     private final List<Supercar> myCarList = new ArrayList<>(4);
 
-    public void buySupercar() {
+    public void buySupercar() throws OrderFailException {
         SupercarDealer dealer = createDealer();
         String clientRequirement = "steering wheel is like sea";
-        Supercar orderedCustomCar = dealer.orderSupercar(clientRequirement);
+        Supercar orderedCustomCar;
+        try {
+            orderedCustomCar = dealer.orderSupercar(clientRequirement);
+        } catch(SupercarCannotMakeByClientRequirementException error) {
+            throw new OrderFailException("Order failure", error);
+        }
         myCarList.add(orderedCustomCar);
     }
 
     protected SupercarDealer createDealer() {
         return new SupercarDealer();
     }
+
 }

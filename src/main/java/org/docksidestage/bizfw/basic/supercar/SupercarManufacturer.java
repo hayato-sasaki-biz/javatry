@@ -20,16 +20,24 @@ import org.docksidestage.bizfw.basic.supercar.SupercarSteeringWheelManufacturer.
 /**
  * The manufacturer(製造業者) of supercar.
  * @author jflute
+ * @author hayato.sasaki
  */
 public class SupercarManufacturer {
 
     private final SupercarEasyCatalog catalog = new SupercarEasyCatalog();
 
-    public Supercar makeSupercar(String catalogKey) {
+    public Supercar makeSupercar(String catalogKey) throws SteeringWheelCannotMakeException {
         Integer steeringWheelId = catalog.findSteeringWheelSpecId(catalogKey);
 
         SupercarSteeringWheelManufacturer manufacturer = createSupercarSteeringWheelManufacturer();
-        SteeringWheel steeringWheel = manufacturer.makeSteeringWheel(steeringWheelId);
+        SteeringWheel steeringWheel;
+        try {
+            steeringWheel = manufacturer.makeSteeringWheel(steeringWheelId);
+        } catch (SpecialScrewCannotMakeException error) {
+            String msg = "Steering wheel cannot be made: catalog key = " + catalogKey;
+            throw new SteeringWheelCannotMakeException(msg, error);
+        }
+
 
         return new Supercar(steeringWheel);
     }

@@ -20,19 +20,28 @@ import org.docksidestage.bizfw.basic.supercar.SupercarManufacturer.Supercar;
 /**
  * The dealer(販売業者) of supercar.
  * @author jflute
+ * @author hayato.sasaki
  */
 public class SupercarDealer {
 
-    public Supercar orderSupercar(String clientRequirement) {
+    public Supercar orderSupercar(String clientRequirement) throws SupercarCannotMakeByClientRequirementException {
         SupercarManufacturer manufacturer = createSupercarManufacturer();
+        String catalogKey;
         if (clientRequirement.contains("steering wheel is like sea")) {
-            return manufacturer.makeSupercar("piari");
+            catalogKey = "piari";
         } else if (clientRequirement.contains("steering wheel is useful on land")) {
-            return manufacturer.makeSupercar("land");
+            catalogKey = "land";
         } else if (clientRequirement.contains("steering wheel has many shop")) {
-            return manufacturer.makeSupercar("piari");
+            catalogKey = "piari";
         } else {
             throw new IllegalStateException("Cannot understand the client requirement: " + clientRequirement);
+        }
+
+        try {
+            return manufacturer.makeSupercar(catalogKey);
+        } catch (SteeringWheelCannotMakeException error) {
+            String msg = "Supercar cannot be made: client requirement = " + clientRequirement;
+            throw new SupercarCannotMakeByClientRequirementException(msg, error);
         }
     }
 
