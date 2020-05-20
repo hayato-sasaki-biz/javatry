@@ -17,6 +17,7 @@ package org.docksidestage.javatry.colorbox;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.docksidestage.bizfw.colorbox.ColorBox;
 import org.docksidestage.bizfw.colorbox.yours.YourPrivateRoom;
@@ -68,6 +69,21 @@ public class Step12StreamStringTest extends PlainTestCase {
      * (カラーボックスに入ってる文字列の中で、一番長いものと短いものの差は何文字？)
      */
     public void test_length_findMaxMinDiff() {
+       List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
+       List<String> stringContentList = colorBoxList.stream()
+                .flatMap(colorBox -> colorBox.getSpaceList().stream())
+                .map(boxSpace -> boxSpace.getContent())
+                .filter(object -> object instanceof String)
+                .map(object -> (String)object)
+                .collect(Collectors.toList());
+        String longestString = stringContentList.stream().max(Comparator.comparing(String::length)).get();
+        String shortestString = stringContentList.stream().min(Comparator.comparing(String::length)).get();
+
+        log(longestString);
+        log(shortestString);
+        int maxMinDiff = longestString.length() - shortestString.length();
+
+        log(maxMinDiff);
     }
 
     // has small #adjustmemts from ClassicStringTest
