@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.docksidestage.bizfw.colorbox.ColorBox;
+import org.docksidestage.bizfw.colorbox.color.BoxColor;
 import org.docksidestage.bizfw.colorbox.yours.YourPrivateRoom;
 import org.docksidestage.unit.PlainTestCase;
 
@@ -144,6 +145,28 @@ public class Step12StreamStringTest extends PlainTestCase {
      * ("Water" で始まる文字列をしまっているカラーボックスの色は？)
      */
     public void test_startsWith_findFirstWord() {
+        List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
+        BoxColor color = colorBoxList.stream()
+                .filter(
+                        // あるcolorBoxが"Water"で始まる文字列をしまっているか判定
+                        colorBox -> {
+                            Object matchedContent = colorBox.getSpaceList().stream()
+                                    .map(boxSpace -> boxSpace.getContent())
+                                    .filter(content -> content instanceof String)
+                                    .filter(content -> content.toString().startsWith("Water"))
+                                    .findAny()
+                                    .orElse(null);
+                            return matchedContent != null;
+                        }
+                )
+                .map(colorBox -> colorBox.getColor())
+                .findFirst()
+                .orElse(null);
+        if (color == null) {
+            log("*not found");
+        } else {
+            log(color);
+        }
     }
 
     /**
