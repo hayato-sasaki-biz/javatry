@@ -15,21 +15,14 @@
  */
 package org.docksidestage.javatry.framework;
 
-import java.util.Map;
-
 import org.docksidestage.bizfw.basic.objanimal.Animal;
 import org.docksidestage.bizfw.basic.objanimal.Dog;
 import org.docksidestage.bizfw.basic.screw.SpecialScrewManufacturer;
 import org.docksidestage.bizfw.basic.supercar.SupercarDealer;
-import org.docksidestage.bizfw.basic.supercar.SupercarManufacturer;
 import org.docksidestage.bizfw.di.container.SimpleDiContainer;
-import org.docksidestage.bizfw.di.container.component.DiContainerModule;
 import org.docksidestage.bizfw.di.nondi.NonDiDirectFirstAction;
 import org.docksidestage.bizfw.di.nondi.NonDiDirectSecondAction;
-import org.docksidestage.bizfw.di.usingdi.UsingDiAccessorAction;
-import org.docksidestage.bizfw.di.usingdi.UsingDiAnnotationAction;
-import org.docksidestage.bizfw.di.usingdi.UsingDiDelegatingAction;
-import org.docksidestage.bizfw.di.usingdi.UsingDiDelegatingLogic;
+import org.docksidestage.bizfw.di.usingdi.*;
 import org.docksidestage.bizfw.di.usingdi.settings.UsingDiModule;
 import org.docksidestage.unit.PlainTestCase;
 
@@ -214,6 +207,10 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      */
     public void test_usingdi_UsingDiWebFrameworkProcess_callfriend_accessor() {
         // execution code here
+        UsingDiWebFrameworkProcess frameworkProcess = new UsingDiWebFrameworkProcess();
+        SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
+        diContainer.registerModule(new UsingDiModule());
+        frameworkProcess.requestAccessorCallFriend();
     }
 
     /**
