@@ -117,7 +117,9 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (NonDiDirectSecondAction と NonDiFactoryMethodAction の違いは？)
      */
     public void test_nondi_difference_between_second_and_FactoryMethod() {
-        // your answer? => 
+        // your answer? => メソッド内部でのインスタンス生成方法が異なる
+        // * NonDiDirectSecondActionの場合: newを直接使う
+        // * NonDiFactoryMethodActionの場合: インスタンスの生成のために必要なプロセスをcreate〇〇というメソッドにまとめている
         // and your confirmation code here freely
     }
 
