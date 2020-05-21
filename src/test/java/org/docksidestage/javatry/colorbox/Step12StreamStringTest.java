@@ -78,14 +78,22 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .filter(object -> object instanceof String)
                 .map(object -> (String)object)
                 .collect(Collectors.toList());
-        String longestString = stringContentList.stream().max(Comparator.comparing(String::length)).get();
-        String shortestString = stringContentList.stream().min(Comparator.comparing(String::length)).get();
+        String longestString = stringContentList.stream()
+                .max(Comparator.comparing(String::length))
+                .orElse(null);
+        String shortestString = stringContentList.stream()
+                .min(Comparator.comparing(String::length))
+                .orElse(null);
 
-        log(longestString);
-        log(shortestString);
-        int maxMinDiff = longestString.length() - shortestString.length();
+        if (longestString == null) {    // longestString == nullならばshortestStringも同様にnull
+            log("There may be no texts in the boxes.");
+        } else {
+            log(longestString);
+            log(shortestString);
+            int maxMinDiff = longestString.length() - shortestString.length();
 
-        log(maxMinDiff);
+            log(maxMinDiff);
+        }
     }
 
     // has small #adjustmemts from ClassicStringTest
