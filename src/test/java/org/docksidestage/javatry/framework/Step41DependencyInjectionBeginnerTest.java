@@ -15,6 +15,9 @@
  */
 package org.docksidestage.javatry.framework;
 
+import org.docksidestage.bizfw.basic.screw.SpecialScrewManufacturer;
+import org.docksidestage.bizfw.di.nondi.NonDiDirectFirstAction;
+import org.docksidestage.bizfw.di.nondi.NonDiDirectSecondAction;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -50,8 +53,63 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (NonDiDirectFirstAction と NonDiDirectSecondAction の違いは？)
      */
     public void test_nondi_difference_between_first_and_second() {
-        // your answer? => 
+        // your answer? => ともにDogやSupercarのインスタンスをメソッドの内部で生成しているが、
+        //                 secondではそれらのクラスのサブクラスのインスタンスを生成している
         // and your confirmation code here freely
+        log("=== NonDiDirectFirstAction ===");
+        NonDiDirectFirstAction firstAction = new NonDiDirectFirstAction();
+        log("=== call friend ===");
+        firstAction.callFriend();
+        log("=== wake up me ===");
+        firstAction.wakeupMe();
+        // NOTE ↑の2つのメソッドは全く同じことをやっている。
+        // また、内部でDogのインスタンスを生成している
+        log("=== go to office ===");
+        try {
+            firstAction.goToOffice();
+        } catch (SpecialScrewManufacturer.SpecialScrewCannotMakeBySpecException e) {
+            log("Exception!!");
+            log(e.getMessage());
+        }
+        log("=== send gift ===");
+        try {
+            firstAction.sendGift();
+        } catch (SpecialScrewManufacturer.SpecialScrewCannotMakeBySpecException e) {
+            log("Exception!!");
+            log(e.getMessage());
+        }
+
+        log("\n=== NonDiDirectSecondAction ===");
+        NonDiDirectSecondAction secondAction = new NonDiDirectSecondAction();
+        log("=== call friend ===");
+        try {
+            secondAction.callFriend();
+        } catch (IllegalStateException e) {
+            log("Exception!!");
+            log(e.getMessage());
+        }
+        log("=== wake up me ===");
+        try {
+            secondAction.wakeupMe();
+        } catch(IllegalStateException e) {
+            log("Exception!!");
+            log(e.getMessage());
+        }
+        // NOTE DogではなくTooLazyDog(Dogのサブクラス)のインスタンスをメソッド内部で生成している
+        log("=== go to office ===");
+        try {
+            secondAction.goToOffice();
+        } catch (SpecialScrewManufacturer.SpecialScrewCannotMakeBySpecException e) {
+            log("Exception!!");
+            log(e.getMessage());
+        }
+        log("=== send gift ===");
+        try {
+            secondAction.sendGift();
+        } catch (SpecialScrewManufacturer.SpecialScrewCannotMakeBySpecException e) {
+            log("Exception!!");
+            log(e.getMessage());
+        }
     }
 
     /**
