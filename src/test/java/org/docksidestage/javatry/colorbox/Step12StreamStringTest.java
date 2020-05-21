@@ -158,19 +158,20 @@ public class Step12StreamStringTest extends PlainTestCase {
         List<BoxColor> colorList = colorBoxList.stream().filter(
                 // あるcolorBoxが"Water"で始まる文字列をしまっているか判定
                 colorBox -> {
-                    // TODO ここは anyMatch を使用するともう少しシンプルにかけます。 by subaru (2020/05/21)
-                    Object matchedContent = colorBox.getSpaceList()
+                    // DONE ここは anyMatch を使用するともう少しシンプルにかけます。 by subaru (2020/05/21)
+                    return colorBox.getSpaceList()
                             .stream()
                             .map(boxSpace -> boxSpace.getContent())
                             .filter(content -> content instanceof String)
-                            .filter(content -> content.toString().startsWith("Water"))
-                            .findAny()
-                            .orElse(null);
-                    return matchedContent != null;
+                            .anyMatch(content -> content.toString().startsWith("Water"));
                 }).map(colorBox -> colorBox.getColor()).collect(Collectors.toList());
-        // TODO ここは colorList だね。 by subaru (2020/05/21)
+        // DONE ここは colorList だね。 by subaru (2020/05/21)
         // ただし colorList を単に log で出力するのは少しみにくいので、log の出力も工夫してみましょう。
-        log(colorBoxList);
+        //log(colorList);
+        log("Waterで始まるカラーボックスの一覧");
+        for (BoxColor color : colorList) {
+            log("\t* " + color);
+        }
     }
 
     /**
