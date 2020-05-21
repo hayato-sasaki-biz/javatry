@@ -16,6 +16,7 @@
 package org.docksidestage.javatry.framework;
 
 import org.docksidestage.bizfw.basic.objanimal.Animal;
+import org.docksidestage.bizfw.basic.objanimal.Cat;
 import org.docksidestage.bizfw.basic.objanimal.Dog;
 import org.docksidestage.bizfw.basic.screw.SpecialScrewManufacturer;
 import org.docksidestage.bizfw.basic.supercar.SupercarDealer;
@@ -228,14 +229,28 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
         // execution code here
         UsingDiWebFrameworkProcess frameworkProcess = new UsingDiWebFrameworkProcess();
         SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
-        diContainer.registerModule(new UsingDiModule());
+        diContainer.registerModule(
+                new UsingDiModule() {
+                    @Override
+                    protected Cat createPlayingCat() {
+                        // ヒットポイントの高い猫のインスタンスを生成
+                        return new Cat() {
+                            // 猫のヒットポイントをふやしたいので初期化部分をオーバーライド
+                            @Override
+                            protected int getInitialHitPoint() {
+                                return 100;
+                            }
+                        };
+                    }
+                }
+        );
         diContainer.resolveDependency();
 
         log("=== annotation call ===");
         frameworkProcess.requestAnnotationCallFriend();
         try {
             log("=== delegating call ===");
-            // WIP 猫のヒットポイントの増やし方が分からないので一旦例外処理で対応 by sasaki (20/05/21)
+            // DONE 猫のヒットポイントの増やし方が分からないので一旦例外処理で対応 by sasaki (20/05/21)
             frameworkProcess.requestDelegatingCallFriend();
         } catch (IllegalStateException e) {
             log(e.getMessage());
