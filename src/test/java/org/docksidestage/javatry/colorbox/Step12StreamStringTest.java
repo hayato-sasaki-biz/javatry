@@ -297,7 +297,7 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_replace_remove_o() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "o";
-        // TODO 一点 String のキャスト不要なので削除しましょう。 by subaru (2020/05/21)
+        // DONE 一点 String のキャスト不要なので削除しましょう。 by subaru (2020/05/21)
         List<Integer> queryRemovedLengthList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
@@ -305,7 +305,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .map(content -> (String) content)
                 .filter(contentString -> contentString.contains(query))
                 .map(contentString -> contentString.replace(query, ""))
-                .map(contentString -> ((String) contentString).length())
+                .map(contentString -> contentString.length())
                 .collect(Collectors.toList());
         log(queryRemovedLengthList);
     }
