@@ -283,7 +283,8 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * https://github.com/lastaflute/lastaflute-example-harbor
      */
     public void test_zone_search_component_on_LastaDi() {
-        // your answer? => 
+        // your answer? => src/main/resources/app.xml および src/main/resources/dbflute.xml
+        // NOTE http://dbflute.seasar.org/ja/lastaflute/lastadi/index.html#richcomp
     }
 
     /**
