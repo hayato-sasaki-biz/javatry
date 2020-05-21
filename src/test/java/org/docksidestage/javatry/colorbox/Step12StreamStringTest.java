@@ -146,7 +146,7 @@ public class Step12StreamStringTest extends PlainTestCase {
      */
     public void test_startsWith_findFirstWord() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
-        BoxColor color = colorBoxList.stream()
+        List<BoxColor> colorList = colorBoxList.stream()
                 .filter(
                         // あるcolorBoxが"Water"で始まる文字列をしまっているか判定
                         colorBox -> {
@@ -160,13 +160,8 @@ public class Step12StreamStringTest extends PlainTestCase {
                         }
                 )
                 .map(colorBox -> colorBox.getColor())
-                .findAny()
-                .orElse(null);
-        if (color == null) {
-            log("*not found");
-        } else {
-            log(color);
-        }
+                .collect(Collectors.toList());
+        log(colorBoxList);
     }
 
     /**
@@ -175,7 +170,7 @@ public class Step12StreamStringTest extends PlainTestCase {
      */
     public void test_endsWith_findLastWord() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
-        BoxColor color = colorBoxList.stream()
+        List<BoxColor> colorList = colorBoxList.stream()
                 .filter(
                         // あるcolorBoxが"front"で終わる文字列をしまっているか判定
                         colorBox -> {
@@ -189,13 +184,8 @@ public class Step12StreamStringTest extends PlainTestCase {
                         }
                 )
                 .map(colorBox -> colorBox.getColor())
-                .findAny()
-                .orElse(null);
-        if (color == null) {
-            log("*not found");
-        } else {
-            log(color);
-        }
+                .collect(Collectors.toList());
+        log(colorList);
     }
 
     // ===================================================================================
