@@ -32,7 +32,7 @@ import org.docksidestage.unit.PlainTestCase;
  * @author hayato.sasaki
  */
 public class Step12StreamStringTest extends PlainTestCase {
-    // TODO 全体的に気になったこと by subaru (2020/05/21)
+    // DONE 全体的に気になったこと by subaru (2020/05/21)
     // log 出力の仕方が気になります。
     // 特に複数回答が想定されていて、出力内容が回答の List オブジェクトのみというものがいくつかありますが、
     // 実行しても初見の人はよくわからないので、出力の形式を工夫してみてください。
@@ -67,7 +67,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .map(object -> (String) object)
                 .max(Comparator.comparing(String::length))
                 .orElse("*not found");
-        log(longestString);
+        log("一番長い文字列: " + longestString);
     }
 
     /**
@@ -88,11 +88,11 @@ public class Step12StreamStringTest extends PlainTestCase {
         if (longestString == null) {    // longestString == nullならばshortestStringも同様にnull
             log("There may be no texts in the boxes.");
         } else {
-            log(longestString);
-            log(shortestString);
+            log("一番長い文字列: " + longestString);
+            log("一番短い文字列: " + shortestString);
             int maxMinDiff = longestString.length() - shortestString.length();
 
-            log(maxMinDiff);
+            log("文字数の差: " + maxMinDiff);
         }
     }
 
@@ -113,7 +113,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .skip(1)
                 .findFirst()
                 .orElse("*not found");
-        log(secondLongestString);
+        log("二番目に長い文字列: " + secondLongestString);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .reduce((accum, value) -> accum + value)
                 .map(reduced -> reduced.length())
                 .orElse(0);
-        log(accumLength);
+        log("カラーボックスに入っている文字列の長さの合計: " + accumLength);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .map(colorBox -> colorBox.getColor().toString())
                 .max(Comparator.comparing(String::length))
                 .orElse("*not found");
-        log(longestColorName);
+        log("一番長い色の名前: " + longestColorName);
     }
 
     // ===================================================================================
@@ -206,15 +206,18 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_indexOf_findIndex() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "front";
+        log(query + "で終わる文字列一覧: ");     //peekメソッドでlog出力
         List<Integer> indexList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(content -> content instanceof String)
                 .map(content -> (String) content)
                 .filter(contentString -> contentString.endsWith(query))
+                .peek(contentString -> log(contentString))
                 .map(contentString -> contentString.indexOf(query) + 1)
                 .collect(Collectors.toList());
-        log(indexList);
+        log("最初の" + query + "が始まる文字位置");
+        indexList.forEach(index -> log(index));
     }
 
     /**
@@ -224,6 +227,7 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_lastIndexOf_findIndex() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         char query = 'ど';
+        log("「" + query + "」を2回以上含む文字列一覧: ");     //peekメソッドでlog出力
         List<Integer> indexList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
@@ -234,10 +238,12 @@ public class Step12StreamStringTest extends PlainTestCase {
                         contentString -> {
                             long queryCount = contentString.chars().filter(ch -> ch == query).count();
                             return queryCount >= 2;
-                        })
+                })
+                .peek(contentString -> log(contentString))
                 .map(contentString -> contentString.lastIndexOf(query) + 1)
                 .collect(Collectors.toList());
-        log(indexList);
+        log("最後の「" + query + "」の文字位置");
+        indexList.forEach(index -> log(index));
     }
 
     // ===================================================================================
@@ -251,7 +257,7 @@ public class Step12StreamStringTest extends PlainTestCase {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "front";
         // DONE この書き方でも大丈夫だけどせっかくなので substring も使ってみましょう。 by subaru (2020/05/21)
-        log(query + "で終わる文字列(一覧):");
+        log(query + "で終わる文字列(一覧):");     //peekメソッドでlog出力
         List<String> firstLetterList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
@@ -273,7 +279,7 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_substring_findLastChar() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "Water";
-        log(query + "で始まる文字列(一覧):");
+        log(query + "で始まる文字列(一覧):");     //peekメソッドでlog出力
         List<String> lastLetterList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
@@ -298,16 +304,19 @@ public class Step12StreamStringTest extends PlainTestCase {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "o";
         // DONE 一点 String のキャスト不要なので削除しましょう。 by subaru (2020/05/21)
+        log(query + "を含んだ文字列(一覧):");     //peekメソッドでlog出力
         List<Integer> queryRemovedLengthList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(content -> content instanceof String)
                 .map(content -> (String) content)
                 .filter(contentString -> contentString.contains(query))
+                .peek(contentString -> log(contentString))
                 .map(contentString -> contentString.replace(query, ""))
                 .map(contentString -> contentString.length())
                 .collect(Collectors.toList());
-        log(queryRemovedLengthList);
+        log(query + "を削除したときの文字数(一覧):");
+        queryRemovedLengthList.forEach(queryRemovedLength -> log(queryRemovedLength));
     }
 
     /**
@@ -316,15 +325,18 @@ public class Step12StreamStringTest extends PlainTestCase {
      */
     public void test_replace_fileseparator() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
+        log("元のパス文字列:");     //peekメソッドでlog出力
         List<String> queryRemovedLengthList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(content -> content instanceof File)
                 .map(content -> (File) content)
                 .map(file -> file.getPath())
+                .peek(filePath -> log(filePath))
                 .map(filePath -> filePath.replace("/", "\\"))
                 .collect(Collectors.toList());
-        log(queryRemovedLengthList);
+        log("置換後のパス文字列:");
+        queryRemovedLengthList.forEach(queryRemovedLength -> log(queryRemovedLength));
     }
 
     // ===================================================================================
@@ -358,7 +370,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                         return "";
                     }
                 }).reduce((accum, value) -> accum + value).map(concatText -> concatText.length()).orElse(0);
-        log(accumulatedTextLength);
+        log("DevilBoxクラスのtextの長さの合計: " + accumulatedTextLength);
     }
 
     // ===================================================================================
