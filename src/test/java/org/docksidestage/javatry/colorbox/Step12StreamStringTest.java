@@ -183,17 +183,17 @@ public class Step12StreamStringTest extends PlainTestCase {
         List<BoxColor> colorList = colorBoxList.stream().filter(
                 // あるcolorBoxが"front"で終わる文字列をしまっているか判定
                 colorBox -> {
-                    // TODO こちらも anyMatch を使ってみてください by subaru (2020/05/21)
-                    Object matchedContent = colorBox.getSpaceList()
+                    // DONE こちらも anyMatch を使ってみてください by subaru (2020/05/21)
+                    return colorBox.getSpaceList()
                             .stream()
                             .map(boxSpace -> boxSpace.getContent())
                             .filter(content -> content instanceof String)
-                            .filter(content -> content.toString().endsWith("front"))
-                            .findAny()
-                            .orElse(null);
-                    return matchedContent != null;
+                            .anyMatch(content -> content.toString().endsWith("front"));
                 }).map(colorBox -> colorBox.getColor()).collect(Collectors.toList());
-        log(colorList);
+        log("Waterで始まるカラーボックスの一覧");
+        for (BoxColor color : colorList) {
+            log("\t* " + color);
+        }
     }
 
     // ===================================================================================
