@@ -32,6 +32,10 @@ import org.docksidestage.unit.PlainTestCase;
  * @author hayato.sasaki
  */
 public class Step12StreamStringTest extends PlainTestCase {
+    // TODO 全体的に気になったこと by subaru (2020/05/21)
+    // log 出力の仕方が気になります。
+    // 特に複数回答が想定されていて、出力内容が回答の List オブジェクトのみというものがいくつかありますが、
+    // 実行しても初見の人はよくわからないので、出力の形式を工夫してみてください。
 
     // ===================================================================================
     //                                                                            length()
@@ -60,7 +64,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(object -> object instanceof String)
-                .map(object -> (String)object)
+                .map(object -> (String) object)
                 .max(Comparator.comparing(String::length))
                 .orElse("*not found");
         log(longestString);
@@ -71,19 +75,15 @@ public class Step12StreamStringTest extends PlainTestCase {
      * (カラーボックスに入ってる文字列の中で、一番長いものと短いものの差は何文字？)
      */
     public void test_length_findMaxMinDiff() {
-       List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
-       List<String> stringContentList = colorBoxList.stream()
+        List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
+        List<String> stringContentList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(object -> object instanceof String)
-                .map(object -> (String)object)
+                .map(object -> (String) object)
                 .collect(Collectors.toList());
-        String longestString = stringContentList.stream()
-                .max(Comparator.comparing(String::length))
-                .orElse(null);
-        String shortestString = stringContentList.stream()
-                .min(Comparator.comparing(String::length))
-                .orElse(null);
+        String longestString = stringContentList.stream().max(Comparator.comparing(String::length)).orElse(null);
+        String shortestString = stringContentList.stream().min(Comparator.comparing(String::length)).orElse(null);
 
         if (longestString == null) {    // longestString == nullならばshortestStringも同様にnull
             log("There may be no texts in the boxes.");
@@ -126,7 +126,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(object -> object instanceof String)
-                .map(object -> (String)object)
+                .map(object -> (String) object)
                 .reduce((accum, value) -> accum + value)
                 .map(reduced -> reduced.length())
                 .orElse(0);
@@ -155,21 +155,21 @@ public class Step12StreamStringTest extends PlainTestCase {
      */
     public void test_startsWith_findFirstWord() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
-        List<BoxColor> colorList = colorBoxList.stream()
-                .filter(
-                        // あるcolorBoxが"Water"で始まる文字列をしまっているか判定
-                        colorBox -> {
-                            Object matchedContent = colorBox.getSpaceList().stream()
-                                    .map(boxSpace -> boxSpace.getContent())
-                                    .filter(content -> content instanceof String)
-                                    .filter(content -> content.toString().startsWith("Water"))
-                                    .findAny()
-                                    .orElse(null);
-                            return matchedContent != null;
-                        }
-                )
-                .map(colorBox -> colorBox.getColor())
-                .collect(Collectors.toList());
+        List<BoxColor> colorList = colorBoxList.stream().filter(
+                // あるcolorBoxが"Water"で始まる文字列をしまっているか判定
+                colorBox -> {
+                    // TODO ここは anyMatch を使用するともう少しシンプルにかけます。 by subaru (2020/05/21)
+                    Object matchedContent = colorBox.getSpaceList()
+                            .stream()
+                            .map(boxSpace -> boxSpace.getContent())
+                            .filter(content -> content instanceof String)
+                            .filter(content -> content.toString().startsWith("Water"))
+                            .findAny()
+                            .orElse(null);
+                    return matchedContent != null;
+                }).map(colorBox -> colorBox.getColor()).collect(Collectors.toList());
+        // TODO ここは colorList だね。 by subaru (2020/05/21)
+        // ただし colorList を単に log で出力するのは少しみにくいので、log の出力も工夫してみましょう。
         log(colorBoxList);
     }
 
@@ -179,21 +179,19 @@ public class Step12StreamStringTest extends PlainTestCase {
      */
     public void test_endsWith_findLastWord() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
-        List<BoxColor> colorList = colorBoxList.stream()
-                .filter(
-                        // あるcolorBoxが"front"で終わる文字列をしまっているか判定
-                        colorBox -> {
-                            Object matchedContent = colorBox.getSpaceList().stream()
-                                    .map(boxSpace -> boxSpace.getContent())
-                                    .filter(content -> content instanceof String)
-                                    .filter(content -> content.toString().endsWith("front"))
-                                    .findAny()
-                                    .orElse(null);
-                            return matchedContent != null;
-                        }
-                )
-                .map(colorBox -> colorBox.getColor())
-                .collect(Collectors.toList());
+        List<BoxColor> colorList = colorBoxList.stream().filter(
+                // あるcolorBoxが"front"で終わる文字列をしまっているか判定
+                colorBox -> {
+                    // TODO こちらも anyMatch を使ってみてください by subaru (2020/05/21)
+                    Object matchedContent = colorBox.getSpaceList()
+                            .stream()
+                            .map(boxSpace -> boxSpace.getContent())
+                            .filter(content -> content instanceof String)
+                            .filter(content -> content.toString().endsWith("front"))
+                            .findAny()
+                            .orElse(null);
+                    return matchedContent != null;
+                }).map(colorBox -> colorBox.getColor()).collect(Collectors.toList());
         log(colorList);
     }
 
@@ -235,8 +233,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                         contentString -> {
                             long queryCount = contentString.chars().filter(ch -> ch == query).count();
                             return queryCount >= 2;
-                        }
-                )
+                        })
                 .map(contentString -> contentString.lastIndexOf(query) + 1)
                 .collect(Collectors.toList());
         log(indexList);
@@ -252,6 +249,7 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_substring_findFirstChar() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "front";
+        // TODO この書き方でも大丈夫だけどせっかくなので substring も使ってみましょう。 by subaru (2020/05/21)
         List<Character> firstLetterList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
@@ -260,6 +258,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .filter(contentString -> contentString.endsWith(query))
                 .map(contentString -> contentString.charAt(0))
                 .collect(Collectors.toList());
+        // TODO ここの log 出力、もとの文字列が何だったかもみれるとわかりやすいですね。 by subaru (2020/05/21)
         log(firstLetterList);
     }
 
@@ -276,7 +275,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .filter(content -> content instanceof String)
                 .map(content -> (String) content)
                 .filter(contentString -> contentString.startsWith(query))
-                .map(contentString -> contentString.charAt(contentString.length()-1))
+                .map(contentString -> contentString.charAt(contentString.length() - 1))
                 .collect(Collectors.toList());
         log(lastLetterList);
     }
@@ -291,6 +290,7 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_replace_remove_o() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "o";
+        // TODO 一点 String のキャスト不要なので削除しましょう。 by subaru (2020/05/21)
         List<Integer> queryRemovedLengthList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
@@ -328,6 +328,10 @@ public class Step12StreamStringTest extends PlainTestCase {
      * (カラーボックスの中に入っているDevilBoxクラスのtextの長さの合計は？)
      */
     public void test_welcomeToDevil() {
+        // TODO こちらよく書けています！ by subaru (2020/05/21)
+        // このままでもいいけど、一応補足すると peek メソッドというものがあります。
+        // これを使用すると途中で devilBoxList というローカル変数に切り出したりせずに書く事ができます。
+        // 修正しなくても大丈夫ですが、余裕があれば調べてみてください！
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         // DevilBoxのリストを取得
         List<YourPrivateRoom.DevilBox> devilBoxList = colorBoxList.stream()
@@ -337,27 +341,19 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .map(content -> (YourPrivateRoom.DevilBox) content)
                 .collect(Collectors.toList());
         // DevilBoxを開いておく
-        devilBoxList.forEach(
-                devilBox -> {
-                    devilBox.wakeUp();
-                    devilBox.allowMe();
-                    devilBox.open();
-                }
-        );
+        devilBoxList.forEach(devilBox -> {
+            devilBox.wakeUp();
+            devilBox.allowMe();
+            devilBox.open();
+        });
         // 開いたDevilBoxのリストの中身(text)を結合し、その長さを計算
-        Integer accumulatedTextLength = devilBoxList.stream()
-                .map(
-                        devilBox -> {
-                            try {
-                                return devilBox.getText();
-                            } catch (YourPrivateRoom.DevilBoxTextNotFoundException e) {
-                                return "";
-                            }
-                        }
-                )
-                .reduce((accum, value) -> accum + value)
-                .map(concatText -> concatText.length())
-                .orElse(0);
+        Integer accumulatedTextLength = devilBoxList.stream().map(devilBox -> {
+            try {
+                return devilBox.getText();
+            } catch (YourPrivateRoom.DevilBoxTextNotFoundException e) {
+                return "";
+            }
+        }).reduce((accum, value) -> accum + value).map(concatText -> concatText.length()).orElse(0);
         log(accumulatedTextLength);
     }
 
