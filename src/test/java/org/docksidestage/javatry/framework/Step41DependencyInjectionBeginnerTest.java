@@ -309,6 +309,7 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * https://github.com/dbflute-example/dbflute-example-on-springboot
      */
     public void test_zone_search_component_on_Spring() {
-        // your answer? => 
+        // your answer? => src/main/java/org/docksidestage/dbflute/exbhv/MemberBhv.java
+        // NOTE @Componentのアノテーションが上記のMemberBhv.javaで付与されている
     }
 }
