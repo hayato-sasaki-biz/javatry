@@ -242,8 +242,13 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (UsingDiAnnotationAction のインスタンス変数 "animal" の実体クラスは？ (UsingDiModuleを登録した時))
      */
     public void test_usingdi_whatis_animal() {
-        // your answer? => 
+        // your answer? => TooLazyDog
         // and your confirmation code here freely
+        SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
+        diContainer.registerModule(new UsingDiModule());
+        diContainer.resolveDependency();
+
+        log(diContainer.getComponent(Animal.class));
     }
 
     // ===================================================================================
@@ -254,8 +259,13 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (DIコンテナとは？)
      */
     public void test_whatis_DIContainer() {
-        // your answer? => 
+        // your answer? => 外部から依存を注入する際に、その注入するインスタンスを管理するもの
         // and your confirmation code here freely
+        SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
+        // DIコンテナで管理したいインスタンスを登録
+        diContainer.registerModule(new UsingDiModule());
+        // DIコンテナに登録した依存関係を調べ、依存の注入を行う
+        diContainer.resolveDependency();
     }
 
     // ===================================================================================
