@@ -335,32 +335,29 @@ public class Step12StreamStringTest extends PlainTestCase {
      * (カラーボックスの中に入っているDevilBoxクラスのtextの長さの合計は？)
      */
     public void test_welcomeToDevil() {
-        // TODO こちらよく書けています！ by subaru (2020/05/21)
+        // DONE こちらよく書けています！ by subaru (2020/05/21)
         // このままでもいいけど、一応補足すると peek メソッドというものがあります。
         // これを使用すると途中で devilBoxList というローカル変数に切り出したりせずに書く事ができます。
         // 修正しなくても大丈夫ですが、余裕があれば調べてみてください！
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         // DevilBoxのリストを取得
-        List<YourPrivateRoom.DevilBox> devilBoxList = colorBoxList.stream()
+        Integer accumulatedTextLength = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(content -> content instanceof YourPrivateRoom.DevilBox)
                 .map(content -> (YourPrivateRoom.DevilBox) content)
-                .collect(Collectors.toList());
-        // DevilBoxを開いておく
-        devilBoxList.forEach(devilBox -> {
-            devilBox.wakeUp();
-            devilBox.allowMe();
-            devilBox.open();
-        });
-        // 開いたDevilBoxのリストの中身(text)を結合し、その長さを計算
-        Integer accumulatedTextLength = devilBoxList.stream().map(devilBox -> {
-            try {
-                return devilBox.getText();
-            } catch (YourPrivateRoom.DevilBoxTextNotFoundException e) {
-                return "";
-            }
-        }).reduce((accum, value) -> accum + value).map(concatText -> concatText.length()).orElse(0);
+                .peek(devilBox -> {
+                    devilBox.wakeUp();
+                    devilBox.allowMe();
+                    devilBox.open();
+                })
+                .map(devilBox -> {
+                    try {
+                        return devilBox.getText();
+                    } catch (YourPrivateRoom.DevilBoxTextNotFoundException e) {
+                        return "";
+                    }
+                }).reduce((accum, value) -> accum + value).map(concatText -> concatText.length()).orElse(0);
         log(accumulatedTextLength);
     }
 
