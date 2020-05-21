@@ -221,6 +221,20 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      */
     public void test_usingdi_UsingDiWebFrameworkProcess_callfriend_annotation_delegating() {
         // execution code here
+        UsingDiWebFrameworkProcess frameworkProcess = new UsingDiWebFrameworkProcess();
+        SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
+        diContainer.registerModule(new UsingDiModule());
+        diContainer.resolveDependency();
+
+        log("=== annotation call ===");
+        frameworkProcess.requestAnnotationCallFriend();
+        try {
+            log("=== delegating call ===");
+            // WIP 猫のヒットポイントの増やし方が分からないので一旦例外処理で対応 by sasaki (20/05/21)
+            frameworkProcess.requestDelegatingCallFriend();
+        } catch (IllegalStateException e) {
+            log(e.getMessage());
+        }
     }
 
     /**
