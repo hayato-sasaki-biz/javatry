@@ -21,7 +21,7 @@ import org.docksidestage.unit.PlainTestCase;
  * The test of Dependency Injection (DI) as beginner level. <br>
  * Show answer by log() or write answer on comment for question of javadoc.
  * @author jflute
- * @author your_name_here
+ * @author hayato.sasaki
  */
 public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
 
@@ -36,9 +36,9 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
         // _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
         // What is Dependency Injection?
         // - - - - - (your answer?)
-        //
-        //
-        //
+        // DIはインスタンスの管理を行うデザインパターン
+        // 管理 = インスタンスの生成 と ライフサイクルの管理
+        // -> DIコンテナから必要なインスタンスを簡単に取り出すことができる
         // _/_/_/_/_/_/_/_/_/_/
     }
 
