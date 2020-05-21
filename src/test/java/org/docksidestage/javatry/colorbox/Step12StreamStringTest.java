@@ -103,7 +103,7 @@ public class Step12StreamStringTest extends PlainTestCase {
                 .sorted(Comparator.comparing(String::length).reversed())
                 .skip(1)
                 .findFirst()
-                .get();
+                .orElse("*not found");
         log(secondLongestString);
     }
 
