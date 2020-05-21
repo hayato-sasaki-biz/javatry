@@ -28,6 +28,8 @@ import org.docksidestage.bizfw.di.nondi.NonDiDirectFirstAction;
 import org.docksidestage.bizfw.di.nondi.NonDiDirectSecondAction;
 import org.docksidestage.bizfw.di.usingdi.UsingDiAccessorAction;
 import org.docksidestage.bizfw.di.usingdi.UsingDiAnnotationAction;
+import org.docksidestage.bizfw.di.usingdi.UsingDiDelegatingAction;
+import org.docksidestage.bizfw.di.usingdi.UsingDiDelegatingLogic;
 import org.docksidestage.bizfw.di.usingdi.settings.UsingDiModule;
 import org.docksidestage.unit.PlainTestCase;
 
@@ -185,8 +187,22 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (UsingDiAnnotationAction と UsingDiDelegatingAction の違いは？)
      */
     public void test_usingdi_difference_between_Annotation_and_Delegating() {
-        // your answer? => 
+        // your answer? =>
+        // * UsingDiAnnotationActionの場合: 依存しているクラスを明確に示している (Animal, Supercar)
+        // * UsingDiDelegatingActionの場合: 依存しているクラスとその機能を分離している (振る舞いだけほしい？)
         // and your confirmation code here freely
+        SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
+        diContainer.registerModule(componentMap -> {
+            componentMap.put(UsingDiDelegatingAction.class, new UsingDiDelegatingAction());
+            componentMap.put(UsingDiDelegatingLogic.class, new UsingDiDelegatingLogic());
+            componentMap.put(Animal.class, new Dog());
+            componentMap.put(SupercarDealer.class, new SupercarDealer());
+        });
+        diContainer.resolveDependency();
+
+        UsingDiDelegatingAction diDelegatingAction =
+                (UsingDiDelegatingAction) diContainer.getComponent(UsingDiDelegatingAction.class);
+        diDelegatingAction.callFriend();
     }
 
     // ===================================================================================
