@@ -128,7 +128,9 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (NonDiFactoryMethodAction と NonDiIndividualFactoryAction の違いは？)
      */
     public void test_nondi_difference_between_FactoryMethod_and_IndividualFactory() {
-        // your answer? => 
+        // your answer? => factoryメソッドの定義位置が異なる
+        // NonDiFactoryActionの場合: NonDiFactoryMethodクラス内でインスタンスの生成方法を定義している
+        // NonDiIndividualFactoryActionの場合: NonDiIndividualFactoryMethodクラスの外でインスタンスの生成方法を定義している
         // and your confirmation code here freely
     }
 
