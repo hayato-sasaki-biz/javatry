@@ -209,7 +209,12 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
         // execution code here
         UsingDiWebFrameworkProcess frameworkProcess = new UsingDiWebFrameworkProcess();
         SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
-        diContainer.registerModule(new UsingDiModule());
+        diContainer.registerModule(componentMap -> {
+            componentMap.put(UsingDiAccessorAction.class, new UsingDiAccessorAction());
+            componentMap.put(Animal.class, new Dog());
+            componentMap.put(SupercarDealer.class, new SupercarDealer());
+        });
+        diContainer.resolveDependency();
         frameworkProcess.requestAccessorCallFriend();
     }
 
