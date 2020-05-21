@@ -15,9 +15,20 @@
  */
 package org.docksidestage.javatry.framework;
 
+import java.util.Map;
+
+import org.docksidestage.bizfw.basic.objanimal.Animal;
+import org.docksidestage.bizfw.basic.objanimal.Dog;
 import org.docksidestage.bizfw.basic.screw.SpecialScrewManufacturer;
+import org.docksidestage.bizfw.basic.supercar.SupercarDealer;
+import org.docksidestage.bizfw.basic.supercar.SupercarManufacturer;
+import org.docksidestage.bizfw.di.container.SimpleDiContainer;
+import org.docksidestage.bizfw.di.container.component.DiContainerModule;
 import org.docksidestage.bizfw.di.nondi.NonDiDirectFirstAction;
 import org.docksidestage.bizfw.di.nondi.NonDiDirectSecondAction;
+import org.docksidestage.bizfw.di.usingdi.UsingDiAccessorAction;
+import org.docksidestage.bizfw.di.usingdi.UsingDiAnnotationAction;
+import org.docksidestage.bizfw.di.usingdi.settings.UsingDiModule;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -142,8 +153,31 @@ public class Step41DependencyInjectionBeginnerTest extends PlainTestCase {
      * (UsingDiAccessorAction と UsingDiAnnotationAction の違いは？)
      */
     public void test_usingdi_difference_between_Accessor_and_Annotation() {
-        // your answer? => 
+        // your answer? => 依存しているインスタンスをどのように紐付けるかが異なる
+        // * UsingDiAccessorActionの場合: setterを用いてインスタンス同士を紐付ける
+        // * UsingDiAnnocationActionの場合: @SimpleInjectのようなアノテーションを用いてインスタンス同士を紐付ける
         // and your confirmation code here freely
+        log("=== UsingDiAccessorAction ===");
+        UsingDiAccessorAction accessorAction = new UsingDiAccessorAction();
+        Animal dog = new Dog();
+        accessorAction.setAnimal(dog);
+        accessorAction.callFriend();
+
+        log("=== UsingDiAnnotationAction ===");
+        // SimpleDiContainerはsingletonなのでnewではなくgetInstance()
+        SimpleDiContainer diContainer = SimpleDiContainer.getInstance();
+        diContainer.registerModule(componentMap -> {
+            // injectされるインスタンス
+            componentMap.put(UsingDiAnnotationAction.class, new UsingDiAnnotationAction());
+            // injectするインスタンス
+            componentMap.put(Animal.class, new Dog());
+            componentMap.put(SupercarDealer.class, new SupercarDealer());
+        });
+        diContainer.resolveDependency();
+
+        UsingDiAnnotationAction diAnnotationAction =
+                (UsingDiAnnotationAction) diContainer.getComponent(UsingDiAnnotationAction.class);
+        diAnnotationAction.callFriend();
     }
 
     /**
