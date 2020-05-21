@@ -250,17 +250,20 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_substring_findFirstChar() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "front";
-        // TODO この書き方でも大丈夫だけどせっかくなので substring も使ってみましょう。 by subaru (2020/05/21)
-        List<Character> firstLetterList = colorBoxList.stream()
+        // DONE この書き方でも大丈夫だけどせっかくなので substring も使ってみましょう。 by subaru (2020/05/21)
+        log(query + "で終わる文字列(一覧):");
+        List<String> firstLetterList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(content -> content instanceof String)
                 .map(content -> (String) content)
                 .filter(contentString -> contentString.endsWith(query))
-                .map(contentString -> contentString.charAt(0))
+                .peek(contentString -> log(contentString))
+                .map(contentString -> contentString.substring(0, 1))
                 .collect(Collectors.toList());
-        // TODO ここの log 出力、もとの文字列が何だったかもみれるとわかりやすいですね。 by subaru (2020/05/21)
-        log(firstLetterList);
+        // DONE ここの log 出力、もとの文字列が何だったかもみれるとわかりやすいですね。 by subaru (2020/05/21)
+        log("frontで終わる文字列の最初の一文字(一覧): ");
+        firstLetterList.forEach(firstLetter -> log(firstLetter));
     }
 
     /**
@@ -270,15 +273,18 @@ public class Step12StreamStringTest extends PlainTestCase {
     public void test_substring_findLastChar() {
         List<ColorBox> colorBoxList = new YourPrivateRoom().getColorBoxList();
         String query = "Water";
-        List<Character> lastLetterList = colorBoxList.stream()
+        log(query + "で始まる文字列(一覧):");
+        List<String> lastLetterList = colorBoxList.stream()
                 .flatMap(colorBox -> colorBox.getSpaceList().stream())
                 .map(boxSpace -> boxSpace.getContent())
                 .filter(content -> content instanceof String)
                 .map(content -> (String) content)
                 .filter(contentString -> contentString.startsWith(query))
-                .map(contentString -> contentString.charAt(contentString.length() - 1))
+                .peek(contentString -> log(contentString))
+                .map(contentString -> contentString.substring(contentString.length() - 1))
                 .collect(Collectors.toList());
-        log(lastLetterList);
+        log(query + "で始まる文字列の最後の一文字(一覧): ");
+        lastLetterList.forEach(lastLetter -> log(lastLetter));
     }
 
     // ===================================================================================
